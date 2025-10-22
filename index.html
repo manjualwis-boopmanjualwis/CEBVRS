@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="header-title">ලංවිම ප්‍රතිලාභ සංසන්දනාත්මක විශ්ලේෂණය</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Iskoola Pota', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        /* Disclaimer Style */
+        .disclaimer-container {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 2px solid #cc0000;
+            background-color: #ffcccc;
+            border-radius: 5px;
+        }
+        .disclaimer-container p {
+            font-weight: bold;
+            color: #cc0000;
+            font-size: 1.2em; /* Slightly larger text */
+            margin: 0;
+        }
+        h1 {
+            color: #004d99;
+            text-align: center;
+            border-bottom: 2px solid #004d99;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .section {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        /* Date and Number inputs */
+        input[type="number"], input[type="date"], select {
+            width: 98%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; 
+        }
+        /* Style for required fields */
+        input:required:invalid {
+            border-color: #d9534f;
+            box-shadow: 0 0 5px rgba(217, 83, 79, 0.5);
+        }
+        .input-group {
+            position: relative;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.85em;
+            margin-top: -5px;
+            margin-bottom: 10px;
+            display: none;
+        }
+        button {
+            background-color: #0066cc;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+        .results {
+            margin-top: 30px;
+            border-top: 2px solid #004d99;
+            padding-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .highlight {
+            background-color: #e6f7ff;
+            font-weight: bold;
+        }
+        .vrs-box {
+            background-color: #d9edf7;
+            padding: 15px;
+            border: 1px solid #bce8f1;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        .vrs-limit {
+            color: #d9534f;
+            font-weight: bold;
+        }
+        .vrs-net {
+            color: #38761d;
+            font-size: 1.1em;
+        }
+        .formula {
+            font-size: 0.8em;
+            color: #555;
+            font-style: italic;
+        }
+        /* Comparison Summary Style */
+        .comparison-summary {
+            margin-top: 30px;
+            padding: 20px;
+            border: 3px solid #004d99;
+            border-radius: 8px;
+            background-color: #e6ffe6; 
+        }
+        .comparison-summary h2 {
+            color: #004d99;
+            margin-top: 0;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 10px;
+        }
+        .comparison-summary table {
+            font-size: 1.1em;
+            width: 100%;
+            margin-top: 10px;
+            border: none;
+        }
+        .comparison-summary td {
+            border: none;
+            padding: 5px 0;
+        }
+        .summary-difference {
+            font-size: 1.3em;
+            color: #cc0000; 
+            font-weight: bold;
+            text-align: right;
+        }
+        .positive-gain {
+            color: #38761d !important; 
+        }
+        .negative-loss {
+            color: #cc0000 !important; 
+        }
+        /* Footer Contact Style */
+        .footer-contact {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 10px;
+            border-top: 1px solid #ccc;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        /* Language Fonts */
+        .tamil-font { font-family: 'Arial Unicode MS', sans-serif; }
+        .english-font { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    </style>
+</head>
+<body>
+
+<div class="disclaimer-container">
+    <p id="disclaimer-text">මෙය හුදෙක් දළ ගණනය කිරීමක් සඳහා පමණි. කිසිදු නෛතික වලංගු භාවයක් නැත.</p>
+</div>
+
+<div class="container">
+    <div class="language-selector" style="text-align: right; margin-bottom: 20px;">
+        <label for="language-select" id="lang-label-select">භාෂාව තෝරන්න:</label>
+        <select id="language-select" onchange="changeLanguage()">
+            <option value="si">සිංහල</option>
+            <option value="en">English</option>
+            <option value="ta">தமிழ்</option>
+        </select>
+    </div>
+
+    <h1 id="header-h1">ලංවිම ප්‍රතිලාභ සංසන්දනාත්මක විශ්ලේෂණය</h1>
+
+    <div class="section" id="assumptions-content">
+        <h3 id="assumptions-heading">ගණනය කිරීමේ උපකල්පන</h3>
+        
+        <ul>
+            <li id="asmp-1">වන්දි ගණනය කිරීමේ පදනම: EPF දායකත්වය ගණනය කිරීම සඳහා සැලකිල්ලට ගන්නා මාසික වැටුප පමණි.</li>
+            <li id="asmp-2">VRS වන්දි සීමාව: උපරිමය Rs. 5,000,000, අවම සීමාව Rs. 900,000 වේ.</li>
+            <li id="asmp-3">Gratuity (පාරිතෝෂිකය): අවසාන වැටුපෙන් 1/2ක් * සම්පූර්ණ කළ සේවා වසර ගණන.</li>
+            <li id="asmp-4">ETF දායකත්වය: සේවකයාගේ මූලික වැටුපෙන් 3%ක් ලෙස ගණනය කෙරේ.</li>
+            <li id="asmp-5">දිගටම සේවය කිරීමේදී: සේවකයා වයස අවුරුදු 60 දක්වා සේවය කරයි.</li>
+        </ul>
+
+        <label id="asmp-6">නියමිත දිනය (Appointed Date - VRS සලකා බලන දින):</label>
+        <div class="input-group">
+            <input type="date" id="appointedDate" required>
+            <div id="error-appointedDate" class="error-message"></div>
+        </div>
+
+        <label id="asmp-7">වාර්ෂික වැටුප් වර්ධන ප්‍රතිශතය (%):</label>
+        <input type="number" id="salaryIncrement" value="5" min="0" step="0.1" required>
+
+        <label id="asmp-8">EPF වාර්ෂික ලාභාංශ ප්‍රතිශතය (%):</label>
+        <input type="number" id="epfDividend" value="9" min="0" step="0.1" required>
+    </div>
+
+    <div class="section">
+        <h3 id="details-heading">සේවක තොරතුරු ඇතුළත් කරන්න</h3>
+        
+        <label id="details-1">උපන් දිනය:</label>
+        <div class="input-group">
+            <input type="date" id="dob" required>
+            <div id="error-dob" class="error-message"></div>
+        </div>
+
+        <label id="details-2">සේවයට බැඳුණු දිනය:</label>
+        <div class="input-group">
+            <input type="date" id="joinDate" required>
+            <div id="error-joinDate" class="error-message"></div>
+        </div>
+
+        <label id="details-3">වත්මන් මූලික වැටුප (Rs.):</label>
+        <input type="number" id="currentSalary" value="" min="1000" placeholder="උදා: 150000" required>
+
+        <label id="details-4">අනියම් සේවා කාලය (වසර/මාස):</label>
+        <div style="display: flex; gap: 10px;">
+            <input type="number" id="casualYears" value="0" min="0" placeholder="වසර">
+            <input type="number" id="casualMonths" value="0" min="0" max="11" placeholder="මාස">
+        </div>
+
+        <label id="details-5">EPF දැනට පවතින ශේෂය (Rs.):</label>
+        <input type="number" id="currentEpfBalance" value="0" min="0" placeholder="උදා: 15000000">
+
+        <label id="details-6">ETF දැනට පවතින ශේෂය (Rs.):</label>
+        <input type="number" id="currentEtfBalance" value="0" min="0" placeholder="උදා: 2500000">
+        
+        <label id="details-7">දැනට මණ්ඩලයට ගෙවිය යුතු ණය මුදලෙහි එකතුව (Rs.):</label>
+        <input type="number" id="loanDeduction" value="0" min="0">
+
+        <button type="button" onclick="calculateBenefits()" id="calculate-button">ප්‍රතිලාභ ගණනය කරන්න</button>
+    </div>
+
+    <div class="results">
+        <h2 id="results-heading">ප්‍රතිඵල සංසන්දනය</h2>
+        <div id="results-container">
+            <p id="initial-message">ගණනය කිරීම් බැලීමට ඉහත බොත්තම ඔබන්න.</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer-contact">
+    <p id="footer-contact-text">අදහස් හා සංස්කරණයන් සඳහා 0702301171 අංකයට WhatsApp පණිවිඩයක් යොමුකරන්න</p>
+</div>
+
+
+<script>
+    // --- Translation Data ---
+    const translations = {
+        si: {
+            disclaimer: "මෙය හුදෙක් දළ ගණනය කිරීමක් සඳහා පමණි. කිසිදු නෛතික වලංගු භාවයක් නැත.",
+            contact: "අදහස් හා සංස්කරණයන් සඳහා 0702301171 අංකයට WhatsApp පණිවිඩයක් යොමුකරන්න",
+            title: "ලංවිම ප්‍රතිලාභ සංසන්දනාත්මක විශ්ලේෂණය",
+            langSelect: "භාෂාව තෝරන්න:",
+            calculateButton: "ප්‍රතිලාභ ගණනය කරන්න",
+            initialMessage: "ගණනය කිරීම් බැලීමට ඉහත බොත්තම ඔබන්න.",
+            assumptionsHeading: "ගණනය කිරීමේ උපකල්පන",
+            asmp1: "වන්දි ගණනය කිරීමේ පදනම: EPF දායකත්වය ගණනය කිරීම සඳහා සැලකිල්ලට ගන්නා මාසික වැටුප පමණි.",
+            asmp2: "VRS වන්දි සීමාව: උපරිමය Rs. 5,000,000, අවම සීමාව Rs. 900,000 වේ.",
+            asmp3: "Gratuity (පාරිතෝෂිකය): අවසාන වැටුපෙන් 1/2ක් * සම්පූර්ණ කළ සේවා වසර ගණන.",
+            asmp4: "ETF දායකත්වය: සේවකයාගේ මූලික වැටුපෙන් 3%ක් ලෙස ගණනය කෙරේ.",
+            asmp5: "දිගටම සේවය කිරීමේදී: සේවකයා වයස අවුරුදු 60 දක්වා සේවය කරයි.",
+            asmp6: "නියමිත දිනය (Appointed Date - VRS සලකා බලන දින):",
+            asmp7: "වාර්ෂික වැටුප් වර්ධන ප්‍රතිශතය (%):",
+            asmp8: "EPF වාර්ෂික ලාභාංශ ප්‍රතිශතය (%):",
+            detailsHeading: "සේවක තොරතුරු ඇතුළත් කරන්න",
+            details1: "උපන් දිනය:",
+            details2: "සේවයට බැඳුණු දිනය:",
+            details3: "වත්මන් මූලික වැටුප (Rs.):",
+            details4: "අනියම් සේවා කාලය (වසර/මාස):",
+            details5: "EPF දැනට පවතින ශේෂය (Rs.):",
+            details6: "ETF දැනට පවතින ශේෂය (Rs.):",
+            details7: "දැනට මණ්ඩලයට ගෙවිය යුතු ණය මුදලෙහි එකතුව (Rs.):",
+            resultsHeading: "ප්‍රතිඵල සංසන්දනය",
+            vrsHeading: "A. ස්වේච්ඡා විශ්‍රාම යාමේ යෝජනා ක්‍රමය (VRS) යටතේ ලැබෙන මුදල (Rs.)",
+            vrsTotalComp: "මුළු වන්දි මුදල (වන්දි සූත්‍රය අනුව):",
+            vrsLimit: "වන්දි සීමාව:",
+            vrsApplied: "VRS වන්දි මුදල (සීමාවට යටත්ව):",
+            vrsLoan: "ණය ගෙවීම් හා අඩුකිරීම්:",
+            vrsNet: "ණය හිලව් වූ පසු අතට ලැබෙන ශුද්ධ මුදල (VRS වන්දි මුදලින් ණය අඩු කළ පසු):",
+            vrsEpfEtfGrat: "EPF, ETF ශේෂයන් සහ Gratuity එකතුව:",
+            vrsTotal: "VRS යටතේ ලැබෙන මුළු ශුද්ධ මුදල:", 
+            vrsNote: "VRS වන්දි මුදලට අමතරව EPF/ETF ශේෂයන් සහ Gratuity ගෙවනු ලැබේ.",
+            contFormula: "සූත්‍රය:",
+            vrsFormula1: "සේවා වසර < 10: වත්මන් වැටුප x 5 x සම්පූර්ණ සේවා වසර",
+            vrsFormula2: "සේවා වසර > 10: (වත්මන් වැටුප x 2 x සම්පූර්ණ සේවා වසර) + (වත්මන් වැටුප x 1.5 x ඉතිරි සම්පූර්ණ සේවා වසර)",
+            gratFormula: "අවසාන වැටුම x 0.5 x සම්පූර්ණ සේවා වසර",
+            continueHeading: "B. අවු. 60 දක්වා සේවය කර විශ්‍රාම යාමෙන් ලැබෙන මුළු ඉපැයීම්",
+            contTable1Title: "වසර 60 දී ලැබෙන මුළු අවසාන ප්‍රතිලාභ (Terminal Benefits)",
+            contTable1Head: "ප්‍රතිලාභය, අවසාන මුදල (Rs.)",
+            contTable1EPF: "EPF අවසාන ශේෂය (සේවක + ආයතන + ලාභාංශ)",
+            contTable1ETF: "ETF අවසාන ශේෂය (ආයතන + ලාභාංශ)",
+            contTable1Gratuity: "Gratuity (පාරිතෝෂිකය)",
+            contTable1Total: "මුළු අවසාන ප්‍රතිලාභ එකතුව (EPF, ETF, Gratuity)",
+            contTable2Title: "අවුරුදු 60 වන තෙක් වාර්ෂික වැටුප් වර්ධන සහ මුළු ඉපැයීම්",
+            contTable2Head: "වර්ෂය, වයස, ආරම්භක මූලික වැටුප (Rs.), වාර්ෂික වැටුප් වැඩිවීම (Rs.), වර්ෂයේ මුළු මූලික වැටුප (Rs.)",
+            contTable2TotalSalary: "VRS දින සිට අවු. 60 දක්වා උපයා ගන්නා මුළු මූලික වැටුප (Total Gross Salary)",
+            contTable3Title: "අඛණ්ඩ සේවයේ වාර්ෂික ගණනය කිරීම් (EPF/ETF වගුව)",
+            contTable3Head: "වර්ෂය, වයස, මූලික වැටුප (Rs.), EPF ආරම්භක ශේෂය (Rs.), නව EPF දායකත්වය (Rs.), EPF ලාභාංශය (Rs.), EPF අවසාන ශේෂය (Rs.)",
+            errorRequired: "කරුණාකර සියලුම අත්‍යාවශ්‍ය ක්ෂේත්‍ර (රතු මායිම් සහිත) පුරවන්න.",
+            errorDate: "වැරදි දිනය ආකෘතිය (yyyy-mm-dd) හෝ වැරදි දිනයකි. කරුණාකර කැලැන්ඩරයෙන් තෝරන්න.",
+            errorSalary: "වත්මන් වැටුප Rs. 1000 වඩා වැඩි විය යුතුය.",
+            errorDOB: "උපන් දිනය අද දිනට පෙර දිනයක් විය යුතුය.",
+            errorJoining: "සේවයට බැඳුණු දිනය VRS දිනයට පෙර විය යුතුය.",
+            errorCalculation: "ගණනය කිරීමේ දෝෂයක් සිදුවිය. කරුණාකර සියලුම දත්ත නිවැරදි බවට වග බලා ගන්න.",
+            summaryHeading: "C. අවසාන මුදල් සංසන්දනාත්මක සාරාංශය",
+            summaryVRS: "VRS යටතේ ලැබෙන මුළු ශුද්ධ මුදල:",
+            summaryContinue: "අවු. 60 දක්වා සේවය කළහොත් ලැබෙන මුළු ආදායම (වැටුප් + ප්‍රතිලාභ):",
+            summaryDifference: "වෙනස (දිගටම සේවය කිරීමේ වාසිය/අවාසිය):",
+            summaryVRSBetter: "දිගටම සේවය කිරීමට වඩා VRS ගැනීමෙන් වැඩි මුදලක් ලැබේ.",
+            summaryContBetter: "VRS ගැනීමට වඩා දිගටම සේවය කිරීමෙන් වැඩි මුදලක් ලැබේ.",
+            contFinalTotalLabel: "හි මුළු ඉපැයීම (Terminal Benefits + Total Gross Salary): "
+        },
+        en: {
+            disclaimer: "This is for approximate calculation purposes only. It holds no legal validity.",
+            contact: "For comments and suggestions, please WhatsApp 0702301171",
+            title: "CEB Benefit Comparative Analysis", langSelect: "Select Language:", calculateButton: "Calculate Benefits", initialMessage: "Click the button above to view calculations.", assumptionsHeading: "Calculation Assumptions", asmp1: "Compensation is calculated only on the Monthly Salary considered for EPF contribution.", asmp2: "VRS Compensation Limit: Maximum Rs. 5,000,000, Minimum Rs. 900,000.", asmp3: "Gratuity: 1/2 of Last Drawn Salary * No. of Completed Years of Service.", asmp4: "ETF Contribution: Calculated as 3% of the Employee's Basic Salary.", asmp5: "Continued Service: Employee works until the age of 60.", asmp6: "Appointed Date (VRS Consideration Date):", asmp7: "Annual Salary Increment (%):", asmp8: "EPF Annual Dividend Rate (%):", asmp9: "Total Loan Amount Currently Owed to the Board (Rs.):", detailsHeading: "Enter Employee Details", details1: "Date of Birth:", details2: "Date of Joining:", details3: "Current Basic Salary (Rs.):", details4: "Casual Service Period (Years/Months):", details5: "Current EPF Balance (Rs.):", details6: "Current ETF Balance (Rs.):", details7: "Total Loan Amount Currently Owed to the Board (Rs.):", resultsHeading: "Comparison Results", vrsHeading: "A. Amount Received under Voluntary Retirement Scheme (VRS) (Rs.)", vrsTotalComp: "Total Compensation (as per formula):", vrsLimit: "Compensation Limit:", vrsApplied: "VRS Compensation (Subject to Limit):", vrsLoan: "Loan Payments and Deductions:", vrsNet: "Net Amount Received after Loan Settlement (VRS Compensation minus Loan):", vrsEpfEtfGrat: "EPF, ETF Balances and Gratuity Total:",
+            vrsTotal: "Total Net Amount Received under VRS:", 
+            vrsNote: "EPF/ETF balances and Gratuity are paid in addition to the VRS compensation.", 
+            contFormula: "Formula:",
+            vrsFormula1: "Service Years < 10: Current Salary x 5 x Completed Service Years",
+            vrsFormula2: "Service Years > 10: (Current Salary x 2 x Completed Service Years) + (Current Salary x 1.5 x Remaining Completed Service Years)",
+            gratFormula: "Final Salary x 0.5 x Completed Service Years",
+            continueHeading: "B. Total Earnings by Continuing Service until Age 60", contTable1Title: "Total Terminal Benefits Received at Age 60", contTable1Head: "Benefit, Final Amount (Rs.)", contTable1EPF: "EPF Final Balance (Employee + Employer + Dividend)", contTable1ETF: "ETF Final Balance (Employer + Dividend)", contTable1Gratuity: "Gratuity Payment", contTable1Total: "Total Terminal Benefits (EPF, ETF, Gratuity)", contTable2Title: "Annual Salary Increments and Total Earnings until Age 60", contTable2Head: "Year, Age, Opening Basic Salary (Rs.), Annual Salary Increase (Rs.), Total Basic Salary for the Year (Rs.)", contTable2TotalSalary: "Total Gross Basic Salary Earned (VRS Date to Age 60)", contTable3Title: "Annual Calculations for Continued Service (EPF/ETF Table)", contTable3Head: "Year, Age, Basic Salary (Rs.), EPF Opening Balance (Rs.), New EPF Contribution (Rs.), EPF Dividend (Rs.), EPF Closing Balance (Rs.)",
+            errorRequired: "Please fill in all required fields (with red borders).",
+            errorDate: "Invalid date format (yyyy-mm-dd) or invalid date. Please select from the calendar.",
+            errorSalary: "Current Salary must be greater than Rs. 1000.",
+            errorDOB: "Date of Birth must be before today's date.",
+            errorJoining: "Joining Date must be before the VRS Date.",
+            errorCalculation: "A calculation error occurred. Please ensure all data is correct.",
+            summaryHeading: "C. Final Financial Comparison Summary",
+            summaryVRS: "Total Net Amount Received under VRS:",
+            summaryContinue: "Total Income if Continued Service until Age 60 (Salary + Benefits):",
+            summaryDifference: "Difference (Advantage/Disadvantage of Continuing Service):",
+            summaryVRSBetter: "VRS yields a higher total amount than continuing service.",
+            summaryContBetter: "Continuing service yields a higher total amount than taking VRS.",
+            contFinalTotalLabel: "Total Income (Terminal Benefits + Total Gross Salary) of "
+        },
+        ta: {
+            disclaimer: "இது தோராயமான கணக்கீட்டு நோக்கங்களுக்காக மட்டுமே. இதற்கு எந்த சட்டப்பூர்வ செல்லுபடியும் இல்லை.",
+            contact: "கருத்துகள் மற்றும் திருத்தங்களுக்கு, 0702301171 என்ற எண்ணுக்கு WhatsApp செய்தி அனுப்பவும்",
+            title: "இலங்கை மின்சார சபையின் பயன் ஒப்பீட்டு பகுப்பாய்வு", langSelect: "மொழியைத் தெரிவுசெய்:", calculateButton: "நன்மைகளைக் கணக்கிடுக", initialMessage: "கணக்கீடுகளைப் பார்க்க மேலே உள்ள பொத்தானை அழுத்தவும்.", assumptionsHeading: "கணக்கீட்டு அனுமானங்கள்", asmp1: "பதிலீடு கணக்கிடப்படுவது, ஊழியர் சேமலாப நிதிக்கான (EPF) பங்களிப்பிற்கு எடுத்துக்கொள்ளப்படும் மாதச் சம்பளத்தின் அடிப்படையில் மட்டுமே.", asmp2: "VRS பதிலீட்டு வரம்பு: அதிகபட்சம் ரூ. 5,000,000, குறைந்தபட்சம் ரூ. 900,000.", asmp3: "பாராட்டுத் தொகை (Gratuity): இறுதிச் சம்பளத்தில் 1/2 * நிறைவு செய்யப்பட்ட சேவை ஆண்டுகளின் எண்ணிக்கை.", asmp4: "ETF பங்களிப்பு: அடிப்படைச் சம்பளத்தில் 3% ஆக கணக்கிடப்படுகிறது.", asmp5: "தொடர்ச்சியான சேவை: ஊழியர் 60 வயது வரை பணியாற்றுகிறார்.", asmp6: "நியமிக்கப்பட்ட தேதி (VRS பரிசீலனை தேதி):", asmp7: "வருடாந்திர சம்பள அதிகரிப்பு விகிதம் (%):",
+            asmp8: "EPF ஆண்டு இலாபப் பங்கு வீதம் (%):", detailsHeading: "ஊழியர் விவரங்களை உள்ளிடுக", details1: "பிறந்த தேதி:", details2: "சேவையில் இணைந்த தேதி:", details3: "தற்போதைய அடிப்படைச் சம்பளம் (ரூ.):", details4: "சாதாரண சேவை காலம் (ஆண்டுகள்/மாதங்கள்):", details5: "தற்போதைய EPF இருப்பு (ரூ.):", details6: "தற்போதைய ETF இருப்பு (ரூ.):", details7: "தற்போது சபைக்கு செலுத்த வேண்டிய மொத்த கடன் தொகை (ரூ.):", resultsHeading: "ஒப்பீட்டு முடிவுகள்", vrsHeading: "A. விருப்ப ஓய்வுத் திட்டத்தின் (VRS) கீழ் பெறப்படும் தொகை (ரூ.)", vrsTotalComp: "மொத்த பதிலீடு (சூத்திரத்தின் படி):", vrsLimit: "பதிலீட்டு வரம்பு:", vrsApplied: "VRS பதிலீடு (வரம்புக்கு உட்பட்டது):", vrsLoan: "கடன் கொடுப்பனவுகள் மற்றும் கழிவுகள்:", vrsNet: "கடன் தீர்வுக்கான நிகர தொகை (VRS பதிலீட்டில் கடன் தொகையைக் கழித்த பின்):", vrsEpfEtfGrat: "EPF, ETF நிலுவைகள் மற்றும் பாராட்டுத் தொகை மொத்தம்:",
+            vrsTotal: "VRS இன் கீழ் பெறப்படும் மொத்த நிகர தொகை:", 
+            vrsNote: "VRS பதிலீட்டுடன் EPF/ETF நிலுவைகளும் மற்றும் பாராட்டுத் தொகையும் செலுத்தப்படும்.", 
+            contFormula: "சூத்திரம்:",
+            vrsFormula1: "சேவை ஆண்டுகள் < 10: தற்போதைய சம்பளம் x 5 x நிறைவு செய்யப்பட்ட சேவை ஆண்டுகள்",
+            vrsFormula2: "சேவை ஆண்டுகள் > 10: (தற்போதைய சம்பளம் x 2 x நிறைவு செய்யப்பட்ட சேவை ஆண்டுகள்) + (தற்போதைய சம்பளம் x 1.5 x மீதமுள்ள நிறைவு செய்யப்பட்ட சேவை ஆண்டுகள்)",
+            gratFormula: "இறுதிச் சம்பளம் x 0.5 x நிறைவு செய்யப்பட்ட சேவை ஆண்டுகள்",
+            continueHeading: "B. 60 வயது வரை தொடர்ந்து சேவை செய்வதன் மூலம் பெறப்படும் மொத்த வருமானம்", contTable1Title: "60 வயதில் பெறப்படும் மொத்த இறுதி நன்மைகள் (Terminal Benefits)", contTable1Head: "பயன், இறுதித் தொகை (ரூ.)", contTable1EPF: "EPF இறுதி இருப்பு (ஊழியர் + நிறுவனம் + இலாபப் பங்கு)", contTable1ETF: "ETF இறுதி இருப்பு (நிறுவனம் + இலாபப் பங்கு)", contTable1Gratuity: "பாராட்டுத் தொகை (Gratuity)", contTable1Total: "மொத்த අවසාන ප්‍රතිලාභ එකතුව (EPF, ETF, Gratuity)", contTable2Title: "60 வயது வரை ஆண்டு சம்பள அதிகரிப்புகள் மற்றும் மொத்த வருமானம்", contTable2Head: "ஆண்டு, வயது, தொடக்க அடிப்படைச் சம்பளம் (ரூ.), ஆண்டு சம்பள அதிகரிப்பு (ரூ.), ஆண்டுக்கான மொத்த அடிப்படைச் சம்பளம் (ரூ.)", contTable2TotalSalary: "மொத்த அடிப்படைச் சம்பளம் (VRS தேதியிலிருந்து 60 வயது வரை)", contTable3Title: "தொடர்ச்சியான சேவையின் வருடாந்திர கணக்கீடுகள் (EPF/ETF அட்டவணை)", contTable3Head: "ஆண்டு, வயது, அடிப்படைச் சம்பளம் (ரூ.), EPF தொடக்க இருப்பு (ரூ.), புதிய EPF பங்களிப்பு (ரூ.), EPF இலாபப் பங்கு (ரூ.), EPF இறுதி இருப்பு (ரூ.)",
+            errorRequired: "தேவையான அனைத்து துறைகளையும் (சிவப்பு எல்லைகளுடன்) நிரப்பவும்.",
+            errorDate: "தவறான திகதி வடிவம் (yyyy-mm-dd) அல்லது தவறான திகதி. நாட்காட்டியில் இருந்து தெரிவு செய்யவும்.",
+            errorSalary: "தற்போதைய சம்பளம் ரூ. 1000 ஐ விட அதிகமாக இருக்க வேண்டும்.",
+            errorDOB: "பிறந்த தேதி இன்றைய தேதிக்கு முன் இருக்க வேண்டும்.",
+            errorJoining: "சேர்ந்த தேதி VRS தேதிக்கு முன் இருக்க வேண்டும்.",
+            errorCalculation: "கணக்கீட்டுப் பிழை ஏற்பட்டது. எல்லா தரவுகளும் சரியாக உள்ளதா என்பதை உறுதிப்படுத்தவும்.",
+            summaryHeading: "C. இறுதி நிதி ஒப்பீட்டு சுருக்கம்",
+            summaryVRS: "VRS இன் கீழ் பெறப்படும் மொத்த நிகர தொகை:",
+            summaryContinue: "60 வயது வரை தொடர்ந்து பணியாற்றினால் மொத்த வருமானம் (சம்பளம் + நன்மைகள்):",
+            summaryDifference: "வித்தியாசம் (தொடர்ந்து பணியாற்றுவதன் நன்மை/தீமை):",
+            summaryVRSBetter: "தொடர்ந்து பணியாற்றுவதை விட VRS பெறுவது அதிக மொத்த தொகையை வழங்குகிறது.",
+            summaryContBetter: "VRS பெறுவதை விட தொடர்ந்து பணியாற்றுவது அதிக மொத்த தொகையை வழங்குகிறது.",
+            contFinalTotalLabel: "இன் மொத்த வருமானம் (Terminal Benefits + Total Gross Salary) of "
+        }
+    };
+
+    let currentLang = 'si';
+
+    // --- Utility Functions ---
+
+    // Parses yyyy-mm-dd (default date input format) to a Date object
+    function parseDate(dateString) {
+        if (!dateString) return null;
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) {
+            return null; 
+        }
+        return date;
+    }
+    
+    // Validates a single date input and shows error message
+    function validateAndGetDate(id) {
+        const input = document.getElementById(id);
+        const errorElement = document.getElementById(`error-${id}`);
+        const t = translations[currentLang];
+        
+        errorElement.style.display = 'none';
+
+        if (!input.value) {
+            return null; 
+        }
+
+        const date = parseDate(input.value);
+        if (!date) {
+            errorElement.textContent = t.errorDate;
+            errorElement.style.display = 'block';
+            return null;
+        }
+
+        if (id === 'dob' && date >= new Date()) {
+             errorElement.textContent = t.errorDOB;
+             errorElement.style.display = 'block';
+             return null;
+        }
+        
+        return date;
+    }
+
+
+    // Calculates the current age based on DOB and current date
+    function calculateAge(dob, currentDate) {
+        if (!dob || !currentDate) return 0;
+        let age = currentDate.getFullYear() - dob.getFullYear();
+        if (currentDate.getMonth() < dob.getMonth() || 
+            (currentDate.getMonth() === dob.getMonth() && currentDate.getDate() < dob.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
+    /**
+     * Calculates difference between two date objects (date1 to date2) in years (decimal)
+     */
+    function calculateDiffInYears(date1, date2) {
+        const diffTime = Math.abs(date2.getTime() - date1.getTime());
+        const totalYears = diffTime / (1000 * 60 * 60 * 24 * 365.25);
+        return { totalYears: totalYears };
+    }
+
+    // Custom function to format currency with 1000 separator (comma)
+    function formatCurrency(amount) {
+        if (isNaN(amount) || amount === null) return 'Rs. 0.00';
+        // Round to 2 decimal places before formatting
+        const roundedAmount = Math.round(amount * 100) / 100; 
+        
+        // Use Intl.NumberFormat to ensure 1000 separator (comma) and two decimal places
+        return new Intl.NumberFormat('en-LK', { 
+            style: 'currency', 
+            currency: 'LKR', 
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }).format(roundedAmount).replace('LKR', 'Rs. ');
+    }
+    
+    // Converts a number to a string with 1000 separator (comma) for formula display
+    function formatNumberForFormula(amount) {
+        if (isNaN(amount) || amount === null) return '0';
+        const roundedAmount = Math.round(amount); // Round to integer for simplicity in formula display
+        return new Intl.NumberFormat('en-LK').format(roundedAmount); 
+    }
+
+
+    // --- Language Functions ---
+    function changeLanguage() {
+        const lang = document.getElementById('language-select').value;
+        currentLang = lang;
+        const t = translations[lang];
+        document.documentElement.lang = lang;
+        
+        // Update static text
+        document.getElementById('header-title').textContent = t.title;
+        document.getElementById('header-h1').textContent = t.title; // H1 heading
+        document.getElementById('disclaimer-text').textContent = t.disclaimer; // Disclaimer
+        document.getElementById('footer-contact-text').textContent = t.contact; // Footer contact
+        document.getElementById('lang-label-select').textContent = t.langSelect;
+        document.getElementById('assumptions-heading').textContent = t.assumptionsHeading;
+        document.getElementById('details-heading').textContent = t.detailsHeading;
+        document.getElementById('calculate-button').textContent = t.calculateButton;
+        document.getElementById('results-heading').textContent = t.resultsHeading;
+
+        // Assumptions
+        document.getElementById('asmp-1').textContent = t.asmp1;
+        document.getElementById('asmp-2').textContent = t.asmp2;
+        document.getElementById('asmp-3').textContent = t.asmp3;
+        document.getElementById('asmp-4').textContent = t.asmp4;
+        document.getElementById('asmp-5').textContent = t.asmp5;
+        document.getElementById('asmp-6').textContent = t.asmp6;
+        document.getElementById('asmp-7').textContent = t.asmp7;
+        document.getElementById('asmp-8').textContent = t.asmp8;
+
+        // Details
+        document.getElementById('details-1').textContent = t.details1;
+        document.getElementById('details-2').textContent = t.details2;
+        document.getElementById('details-3').textContent = t.details3;
+        document.getElementById('details-4').textContent = t.details4;
+        document.getElementById('details-5').textContent = t.details5;
+        document.getElementById('details-6').textContent = t.details6;
+        document.getElementById('details-7').textContent = t.details7; // Loan
+
+        // Font adjustment
+        if (lang === 'ta') {
+            document.body.classList.add('tamil-font');
+            document.body.classList.remove('english-font');
+        } else if (lang === 'en') {
+            document.body.classList.add('english-font');
+            document.body.classList.remove('tamil-font');
+        } else {
+            document.body.classList.remove('tamil-font');
+            document.body.classList.remove('english-font');
+        }
+
+        // Attempt to refresh results to translate tables if results exist
+        const resultsContainer = document.getElementById('results-container');
+        if (resultsContainer.innerHTML.includes('vrs-box')) {
+             try {
+                 // Re-calculate results silently to apply language changes
+                 calculateBenefits(true); 
+             } catch (e) {
+                 // Ignore errors during translation update if fields are empty
+             }
+        } else if (resultsContainer.querySelector('#initial-message')) {
+            resultsContainer.querySelector('#initial-message').textContent = t.initialMessage;
+        }
+    }
+
+
+    // --- Main Calculation Function ---
+    function calculateBenefits(isTranslation = false) {
+        
+        const t = translations[currentLang];
+        const resultsContainer = document.getElementById('results-container');
+        const calculateButton = document.getElementById('calculate-button');
+
+        // 1. Initial State Setup
+        if (!isTranslation) {
+             resultsContainer.innerHTML = '';
+             calculateButton.disabled = true;
+        }
+        
+        // 2. Check HTML5 required fields first
+        const requiredInputs = document.querySelectorAll('input:required');
+        let formValid = true;
+        requiredInputs.forEach(input => {
+            if (!input.checkValidity()) {
+                formValid = false;
+                if (!isTranslation) input.reportValidity(); 
+            }
+        });
+
+        if (!formValid && !isTranslation) {
+             calculateButton.disabled = false;
+             resultsContainer.innerHTML = `<p style="color:red; font-weight: bold;">${t.errorRequired}</p>`;
+             return;
+        }
+        
+
+        try {
+            // --- 3. Get Inputs & Parse Dates (with stricter validation) ---
+            const dob = validateAndGetDate('dob');
+            const joinDate = validateAndGetDate('joinDate');
+            const appointedDate = validateAndGetDate('appointedDate');
+            
+            // Check for date parsing errors
+            if (!dob || !joinDate || !appointedDate) {
+                 calculateButton.disabled = false;
+                 if (!isTranslation) resultsContainer.innerHTML = `<p style="color:red; font-weight: bold;">${t.errorDate}</p>`;
+                 return;
+            }
+
+            // --- Get Numerical Inputs ---
+            const currentSalary = parseFloat(document.getElementById('currentSalary').value);
+            const casualYears = parseInt(document.getElementById('casualYears').value) || 0;
+            const casualMonths = parseInt(document.getElementById('casualMonths').value) || 0;
+            const currentEpfBalance = parseFloat(document.getElementById('currentEpfBalance').value) || 0;
+            const currentEtfBalance = parseFloat(document.getElementById('currentEtfBalance').value) || 0;
+            const salaryIncrementRate = parseFloat(document.getElementById('salaryIncrement').value) / 100;
+            const epfDividendRate = parseFloat(document.getElementById('epfDividend').value) / 100;
+            const loanDeduction = parseFloat(document.getElementById('loanDeduction').value) || 0;
+
+            // --- Final Logic Checks ---
+            if (joinDate >= appointedDate) {
+                document.getElementById(`error-joinDate`).textContent = t.errorJoining;
+                document.getElementById(`error-joinDate`).style.display = 'block';
+                calculateButton.disabled = false;
+                if (!isTranslation) resultsContainer.innerHTML = `<p style="color:red; font-weight: bold;">${t.errorJoining}</p>`;
+                return;
+            }
+            document.getElementById(`error-joinDate`).style.display = 'none';
+
+
+            // --- Constants ---
+            const VRS_MAX_LIMIT = 5000000;
+            const VRS_MIN_LIMIT = 900000;
+            const EPF_EMPLOYEE_RATE = 0.10;
+            const EPF_EMPLOYER_RATE = 0.15;
+            const ETF_EMPLOYER_RATE = 0.03;
+            const RETIREMENT_AGE = 60;
+
+            /**
+             * Calculates Gratuity based on completed service years.
+             * @param {number} lastSalary - The final or current basic salary.
+             * @param {number} totalServiceYearsDecimal - Service years up to date (decimal).
+             * @param {number} casualYears - Casual years.
+             * @param {number} casualMonths - Casual months.
+             * @returns {{amount: number, completedYears: number}}
+             */
+            function calculateGratuity(lastSalary, totalServiceYearsDecimal, casualYears, casualMonths) {
+                // Total service years including casual, then floor to get completed years
+                const totalServiceInYears = totalServiceYearsDecimal + casualYears + (casualMonths / 12);
+                const completedYears = Math.floor(totalServiceInYears); 
+                
+                if (completedYears < 5) return { amount: 0, completedYears: completedYears }; 
+                
+                return { amount: (lastSalary / 2) * completedYears, completedYears: completedYears };
+            }
+
+            // --- 4. VRS Scenario Calculation (A) ---
+            const vrsServiceDiff = calculateDiffInYears(joinDate, appointedDate);
+            const vrsServiceYearsDecimal = vrsServiceDiff.totalYears;
+            
+            // VRS completed years for compensation calculation (uses only completed years based on user request)
+            const totalServiceUpToVRS = vrsServiceYearsDecimal + casualYears + (casualMonths / 12);
+            const completedVrsYears = Math.floor(totalServiceUpToVRS);
+            
+            const retirementDate = new Date(dob.getFullYear() + RETIREMENT_AGE, dob.getMonth(), dob.getDate());
+            
+            // Remaining service years (decimal value is calculated first)
+            const yearsToRetirement = calculateDiffInYears(appointedDate, retirementDate).totalYears;
+            
+            // Now, floor it to get only completed remaining years (as requested by user)
+            const completedRemainingServiceYears = Math.max(0, Math.floor(yearsToRetirement));
+
+            let totalVrsCompensation = 0;
+            let vrsFormulaDisplay;
+
+            if (completedVrsYears < 10) {
+                // Use Completed Years
+                totalVrsCompensation = currentSalary * 5 * completedVrsYears;
+                vrsFormulaDisplay = `${t.vrsFormula1} = ${formatNumberForFormula(currentSalary)} x 5 x ${completedVrsYears}`;
+            } else {
+                // Use Completed Years for both parts
+                totalVrsCompensation = (currentSalary * 2 * completedVrsYears) + (currentSalary * 1.5 * completedRemainingServiceYears);
+                vrsFormulaDisplay = `${t.vrsFormula2} = (${formatNumberForFormula(currentSalary)} x 2 x ${completedVrsYears}) + (${formatNumberForFormula(currentSalary)} x 1.5 x ${completedRemainingServiceYears})`;
+            }
+            
+            let appliedVrsCompensation = Math.min(VRS_MAX_LIMIT, Math.max(VRS_MIN_LIMIT, totalVrsCompensation));
+            
+            // Gratuity calculation for VRS (uses completed years)
+            const vrsGratuityResult = calculateGratuity(currentSalary, vrsServiceYearsDecimal, casualYears, casualMonths);
+            const vrsGratuity = vrsGratuityResult.amount;
+            const vrsGratuityFormulaDisplay = `${t.gratFormula} = ${formatNumberForFormula(currentSalary)} x 0.5 x ${vrsGratuityResult.completedYears}`;
+
+
+            const vrsNetCompensation = appliedVrsCompensation - loanDeduction;
+            
+            // Total Payout under VRS = (VRS Compensation - Loan) + EPF Balance + ETF Balance + Gratuity
+            const vrsEpfEtfGratuityTotal = currentEpfBalance + currentEtfBalance + vrsGratuity;
+            const vrsFinalTotal = vrsNetCompensation + vrsEpfEtfGratuityTotal;
+
+
+            // --- 5. Continued Service Scenario Calculation (B) ---
+            
+            let projectedSalary = currentSalary;
+            let projectedEpf = currentEpfBalance;
+            let projectedEtf = currentEtfBalance;
+            let runningTotalSalary = 0; 
+
+            let annualEpfCalculations = [];
+            let annualSalaryCalculations = [];
+            
+            const startYear = appointedDate.getFullYear();
+            const endYear = retirementDate.getFullYear(); 
+            
+            for (let year = startYear; year <= endYear; year++) {
+                
+                const yearStartDate = new Date(year, 0, 1);
+                const yearEndDate = new Date(year, 11, 31);
+                
+                let contributionStart = (year === startYear && appointedDate > yearStartDate) ? appointedDate : yearStartDate;
+                let contributionEnd = (year === endYear && retirementDate < yearEndDate) ? retirementDate : yearEndDate;
+
+                if (contributionEnd <= contributionStart) continue;
+
+                const workingDays = (contributionEnd - contributionStart) / (1000 * 60 * 60 * 24);
+                
+                // Simplified working months calculation based on days 
+                const workingMonths = Math.max(0, Math.min(Math.round(workingDays / (365.25 / 12)), 12)); 
+
+                if (workingMonths > 0) {
+                    
+                    const currentSalaryForCalculation = projectedSalary;
+                    
+                    const annualSalaryIncrease = currentSalaryForCalculation * salaryIncrementRate;
+                    const annualSalaryEarnings = currentSalaryForCalculation * workingMonths;
+                    runningTotalSalary += annualSalaryEarnings;
+                    
+                    const newEpfContribution = (annualSalaryEarnings * EPF_EMPLOYEE_RATE) + (annualSalaryEarnings * EPF_EMPLOYER_RATE);
+                    const newEtfContribution = (annualSalaryEarnings * ETF_EMPLOYER_RATE);
+                    
+                    const epfDividendAmount = projectedEpf * epfDividendRate;
+                    const epfClosingBalance = projectedEpf + newEpfContribution + epfDividendAmount;
+
+                    const etfDividendAmount = projectedEtf * epfDividendRate; 
+                    const etfClosingBalance = projectedEtf + newEtfContribution + etfDividendAmount;
+
+                    annualEpfCalculations.push({
+                        year: year,
+                        age: calculateAge(dob, contributionEnd),
+                        salary: currentSalaryForCalculation,
+                        epfOpening: projectedEpf,
+                        epfNewCont: newEpfContribution,
+                        epfDividend: epfDividendAmount,
+                        epfClosing: epfClosingBalance,
+                    });
+
+                    annualSalaryCalculations.push({
+                        year: year,
+                        age: calculateAge(dob, contributionEnd),
+                        openingSalary: currentSalaryForCalculation,
+                        increase: annualSalaryIncrease,
+                        totalYearSalary: annualSalaryEarnings,
+                    });
+
+                    projectedEpf = epfClosingBalance;
+                    projectedEtf = etfClosingBalance;
+                    
+                    // Apply increment for the NEXT year
+                    if (year < endYear) {
+                        projectedSalary = currentSalaryForCalculation * (1 + salaryIncrementRate);
+                    }
+                }
+            }
+
+            // Final Gratuity calculation (at age 60, uses completed years)
+            const finalSalaryUsedForGratuity = annualEpfCalculations.length > 0 ? annualEpfCalculations[annualEpfCalculations.length - 1].salary : projectedSalary;
+            const finalServiceYearsDecimal = calculateDiffInYears(joinDate, retirementDate).totalYears;
+            const finalGratuityResult = calculateGratuity(finalSalaryUsedForGratuity, finalServiceYearsDecimal, casualYears, casualMonths);
+            const finalGratuity = finalGratuityResult.amount;
+            
+            const totalTerminalBenefits = projectedEpf + projectedEtf + finalGratuity;
+            
+            // Final Continue Service Total for Comparison
+            const continueFinalTotal = totalTerminalBenefits + runningTotalSalary; 
+
+
+            // --- 6. Format and Display Results ---
+            let html = '';
+
+            // --- A. VRS Results ---
+            html += `<div class="vrs-box">
+                        <h3 id="vrs-heading">${t.vrsHeading} (${appointedDate.toLocaleDateString('si-LK', { year: 'numeric', month: 'numeric', day: 'numeric' })})</h3>
+                        <table>
+                            <tr>
+                                <td id="vrs-total-comp">${t.vrsTotalComp}</td>
+                                <td>${formatCurrency(totalVrsCompensation)}
+                                    <div class="formula">${t.contFormula} ${vrsFormulaDisplay}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="vrs-limit" class="vrs-limit">${t.vrsLimit} (Rs. 5,000,000)</td>
+                                <td class="vrs-limit">${formatCurrency(appliedVrsCompensation)}</td>
+                            </tr>
+                            <tr>
+                                <td id="vrs-loan">${t.vrsLoan}</td>
+                                <td>${formatCurrency(loanDeduction)}</td>
+                            </tr>
+                            <tr class="highlight">
+                                <td id="vrs-net">${t.vrsNet}</td>
+                                <td >${formatCurrency(vrsNetCompensation)}</td>
+                            </tr>
+                        </table>
+                        <p id="vrs-note" style="font-style: italic; margin-top: 15px;">${t.vrsNote}</p>
+                        <table>
+                             <tr>
+                                <td><strong>Gratuity (පාරිතෝෂිකය):</strong></td>
+                                <td>${formatCurrency(vrsGratuity)}
+                                    <div class="formula">${t.contFormula} ${vrsGratuityFormulaDisplay}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="vrs-epfetfgrat"><strong>${t.vrsEpfEtfGrat}</strong></td>
+                                <td>${formatCurrency(vrsEpfEtfGratuityTotal)}</td>
+                            </tr>
+                            <tr class="highlight">
+                                <td id="vrs-total" class="vrs-net"><strong>${t.vrsTotal}</strong></td>
+                                <td class="vrs-net"><strong>${formatCurrency(vrsFinalTotal)}</strong></td>
+                            </tr>
+                        </table>
+                    </div>`;
+
+            // --- B. Continued Service Results ---
+            html += `<div class="section">
+                        <h3 id="continue-heading">${t.continueHeading}</h3>
+                        
+                        <h4 id="cont-table1-title">${t.contTable1Title}</h4>
+                        <table>
+                            <tr><th>${t.contTable1Head.split(',')[0]}</th><th>${t.contTable1Head.split(',')[1]}</th></tr>
+                            <tr><td id="cont-table1-epf">${t.contTable1EPF}</td><td>${formatCurrency(projectedEpf)}</td></tr>
+                            <tr><td id="cont-table1-etf">${t.contTable1ETF}</td><td>${formatCurrency(projectedEtf)}</td></tr>
+                            <tr>
+                                <td id="cont-table1-gratuity">${t.contTable1Gratuity}</td>
+                                <td>${formatCurrency(finalGratuity)}
+                                    <div class="formula">${t.contFormula} ${formatNumberForFormula(finalSalaryUsedForGratuity)} x 0.5 x ${finalGratuityResult.completedYears}</div>
+                                </td>
+                            </tr>
+                            <tr class="highlight"><td id="cont-table1-total">${t.contTable1Total}</td><td>${formatCurrency(totalTerminalBenefits)}</td></tr>
+                        </table>
+                        
+                        <hr style="margin: 20px 0;">
+
+                        <h4 id="cont-table2-title">${t.contTable2Title}</h4>
+                        <table>
+                            <tr>
+                                <th>${t.contTable2Head.split(',')[0]}</th>
+                                <th>${t.contTable2Head.split(',')[1]}</th>
+                                <th>${t.contTable2Head.split(',')[2]}</th>
+                                <th>${t.contTable2Head.split(',')[3]}</th>
+                                <th>${t.contTable2Head.split(',')[4]}</th>
+                            </tr>
+                            ${annualSalaryCalculations.map(row => `
+                                <tr>
+                                    <td>${row.year}</td>
+                                    <td>${row.age}</td>
+                                    <td>${formatCurrency(row.openingSalary)}</td>
+                                    <td>${formatCurrency(row.increase)}</td>
+                                    <td>${formatCurrency(row.totalYearSalary)}</td>
+                                </tr>
+                            `).join('')}
+                            <tr class="highlight"><td colspan="4" style="text-align: right;">${t.contTable2TotalSalary}</td><td>${formatCurrency(runningTotalSalary)}</td></tr>
+                        </table>
+                        
+                        <div style="font-size: 1.2em; font-weight: bold; margin-top: 10px; text-align: right;">
+                            <span id="cont-final-total-label">${t.continueHeading} ${t.contFinalTotalLabel}</span>
+                            <span id="cont-final-total-value" style="color:#0066cc;">${formatCurrency(continueFinalTotal)}</span>
+                        </div>
+                        <hr style="margin: 20px 0;">
+
+
+                        <h4 id="cont-table3-title">${t.contTable3Title}</h4>
+                        <table>
+                            <tr>
+                                <th>${t.contTable3Head.split(',')[0]}</th>
+                                <th>${t.contTable3Head.split(',')[1]}</th>
+                                <th>${t.contTable3Head.split(',')[2]}</th>
+                                <th>${t.contTable3Head.split(',')[3]}</th>
+                                <th>${t.contTable3Head.split(',')[4]}</th>
+                                <th>${t.contTable3Head.split(',')[5]}</th>
+                                <th>${t.contTable3Head.split(',')[6]}</th>
+                            </tr>
+                            ${annualEpfCalculations.map(row => `
+                                <tr>
+                                    <td>${row.year}</td>
+                                    <td>${row.age}</td>
+                                    <td>${formatCurrency(row.salary)}</td>
+                                    <td>${formatCurrency(row.epfOpening)}</td>
+                                    <td>${formatCurrency(row.epfNewCont)}</td>
+                                    <td>${formatCurrency(row.epfDividend)}</td>
+                                    <td>${formatCurrency(row.epfClosing)}</td>
+                                </tr>
+                            `).join('')}
+                        </table>
+                    </div>`;
+                    
+            // --- C. Comparison Summary ---
+            const difference = continueFinalTotal - vrsFinalTotal;
+            const diffClass = difference >= 0 ? 'positive-gain' : 'negative-loss';
+            const betterOption = difference >= 0 ? t.summaryContBetter : t.summaryVRSBetter;
+            const comparisonSign = difference >= 0 ? '+' : ''; // Add '+' sign for positive difference
+
+            html += `<div class="comparison-summary">
+                        <h2 id="summary-heading">${t.summaryHeading}</h2>
+                        <table>
+                            <tr>
+                                <td id="summary-vrs-label" style="width: 70%;"><strong>${t.summaryVRS}</strong></td>
+                                <td style="text-align: right;">${formatCurrency(vrsFinalTotal)}</td>
+                            </tr>
+                            <tr>
+                                <td id="summary-continue-label"><strong>${t.summaryContinue}</strong></td>
+                                <td style="text-align: right;">${formatCurrency(continueFinalTotal)}</td>
+                            </tr>
+                            <tr style="border-top: 2px solid #004d99;">
+                                <td id="summary-difference-label"><strong>${t.summaryDifference}</strong></td>
+                                <td class="summary-difference ${diffClass}">
+                                    ${comparisonSign}${formatCurrency(Math.abs(difference))}
+                                </td>
+                            </tr>
+                        </table>
+                        <p style="margin-top: 15px; font-weight: bold; text-align: center; font-size: 1.1em; color: ${diffClass === 'positive-gain' ? '#38761d' : '#cc0000'};">
+                            * ${betterOption}
+                        </p>
+                    </div>`;
+
+            resultsContainer.innerHTML = html;
+
+            calculateButton.disabled = false;
+            changeLanguage(); // Ensure all new content is translated
+
+        } catch (e) {
+            // Safety net for unexpected errors
+            console.error("Calculation Error:", e);
+            calculateButton.disabled = false;
+            if (!isTranslation) {
+                resultsContainer.innerHTML = `<p style="color:red; font-weight: bold;">${t.errorCalculation} <br/> දෝෂ විස්තරය: ${e.message}</p>`;
+            }
+        }
+    }
+    
+    // Initial setup on load
+    document.addEventListener('DOMContentLoaded', () => {
+        // Set default date for appointed date (2025-10-27 in yyyy-mm-dd format for type="date")
+        document.getElementById('appointedDate').value = '2025-10-27';
+        changeLanguage(); // Set default language (Sinhala)
+    });
+</script>
+
+</body>
+</html>
