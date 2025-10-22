@@ -36,6 +36,17 @@
             font-size: 1.2em; /* Slightly larger text */
             margin: 0;
         }
+        
+        /* New Orange Data Note Style - ඔබ ඉල්ලූ තැඹිලි පාට සටහන */
+        .data-note {
+            color: #ff8c00; /* Darker Orange */
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
         h1 {
             color: #004d99;
             text-align: center;
@@ -171,14 +182,16 @@
         .negative-loss {
             color: #cc0000 !important; 
         }
-        /* Footer Contact Style */
+        /* Footer Contact Style - ඔබ ඉල්ලූ පරිදි විශාල හා දීප්තිමත් කර ඇත */
         .footer-contact {
             text-align: center;
             margin-top: 40px;
-            padding-top: 10px;
+            padding: 15px 0; /* Padding වැඩි කර ඇත */
             border-top: 1px solid #ccc;
-            font-size: 0.9em;
-            color: #666;
+            font-size: 1.1em; /* අකුරු විශාල කර ඇත */
+            color: white; /* අකුරු සුදු කර ඇත */
+            background-color: #333; /* දීප්තිමත් පසුබිමක් ලබා දී ඇත */
+            font-weight: bold;
         }
         
         /* Language Fonts */
@@ -192,10 +205,11 @@
     <p id="disclaimer-text">මෙය හුදෙක් දළ ගණනය කිරීමක් සඳහා පමණි. කිසිදු නෛතික වලංගු භාවයක් නැත.</p>
 </div>
 
+<p class="data-note" id="data-note-text">මෙම වැඩසටහන මගින් ඔබගේ කිසිදු දත්තයක් රඳවා තබා ගන්නේ නැත</p>
 <div class="container">
     <div class="language-selector" style="text-align: right; margin-bottom: 20px;">
         <label for="language-select" id="lang-label-select">භාෂාව තෝරන්න:</label>
-        <select id="language-select" onchange="changeLanguage()">
+        <select id="language-select" onchange="calculateBenefits(true); changeLanguage();">
             <option value="si">සිංහල</option>
             <option value="en">English</option>
             <option value="ta">தமிழ்</option>
@@ -283,6 +297,7 @@
     const translations = {
         si: {
             disclaimer: "මෙය හුදෙක් දළ ගණනය කිරීමක් සඳහා පමණි. කිසිදු නෛතික වලංගු භාවයක් නැත.",
+            dataNote: "මෙම වැඩසටහන මගින් ඔබගේ කිසිදු දත්තයක් රඳවා තබා ගන්නේ නැත", // NEW
             contact: "අදහස් හා සංස්කරණයන් සඳහා 0702301171 අංකයට WhatsApp පණිවිඩයක් යොමුකරන්න",
             title: "ලංවිම ප්‍රතිලාභ සංසන්දනාත්මක විශ්ලේෂණය",
             langSelect: "භාෂාව තෝරන්න:",
@@ -347,6 +362,7 @@
         },
         en: {
             disclaimer: "This is for approximate calculation purposes only. It holds no legal validity.",
+            dataNote: "This program does not retain any of your data", // NEW
             contact: "For comments and suggestions, please WhatsApp 0702301171",
             title: "CEB Benefit Comparative Analysis", langSelect: "Select Language:", calculateButton: "Calculate Benefits", initialMessage: "Click the button above to view calculations.", assumptionsHeading: "Calculation Assumptions", asmp1: "Compensation is calculated only on the Monthly Salary considered for EPF contribution.", asmp2: "VRS Compensation Limit: Maximum Rs. 5,000,000, Minimum Rs. 900,000.", asmp3: "Gratuity: 1/2 of Last Drawn Salary * No. of Completed Years of Service.", asmp4: "ETF Contribution: Calculated as 3% of the Employee's Basic Salary.", asmp5: "Continued Service: Employee works until the age of 60.", asmp6: "Appointed Date (VRS Consideration Date):", asmp7: "Annual Salary Increment (%):", asmp8: "EPF Annual Dividend Rate (%):", asmp9: "Total Loan Amount Currently Owed to the Board (Rs.):", detailsHeading: "Enter Employee Details", details1: "Date of Birth:", details2: "Date of Joining:", details3: "Current Basic Salary (Rs.):", details4: "Casual Service Period (Years/Months):", details5: "Current EPF Balance (Rs.):", details6: "Current ETF Balance (Rs.):", details7: "Total Loan Amount Currently Owed to the Board (Rs.):", resultsHeading: "Comparison Results", vrsHeading: "A. Amount Received under Voluntary Retirement Scheme (VRS) (Rs.)", vrsTotalComp: "Total Compensation (as per formula):", vrsLimit: "Compensation Limit:", vrsApplied: "VRS Compensation (Subject to Limit):", vrsLoan: "Loan Payments and Deductions:", vrsNet: "Net Amount Received after Loan Settlement (VRS Compensation minus Loan):", vrsEpfEtfGrat: "EPF, ETF Balances and Gratuity Total:",
             vrsTotal: "Total Net Amount Received under VRS:", 
@@ -372,6 +388,7 @@
         },
         ta: {
             disclaimer: "இது தோராயமான கணக்கீட்டு நோக்கங்களுக்காக மட்டுமே. இதற்கு எந்த சட்டப்பூர்வ செல்லுபடியும் இல்லை.",
+            dataNote: "இந்த நிகழ்ச்சி நிரலால் உங்கள் தரவுகள் எதுவும் தக்கவைக்கப்படுவதில்லை", // NEW
             contact: "கருத்துகள் மற்றும் திருத்தங்களுக்கு, 0702301171 என்ற எண்ணுக்கு WhatsApp செய்தி அனுப்பவும்",
             title: "இலங்கை மின்சார சபையின் பயன் ஒப்பீட்டு பகுப்பாய்வு", langSelect: "மொழியைத் தெரிவுசெய்:", calculateButton: "நன்மைகளைக் கணக்கிடுக", initialMessage: "கணக்கீடுகளைப் பார்க்க மேலே உள்ள பொத்தானை அழுத்தவும்.", assumptionsHeading: "கணக்கீட்டு அனுமானங்கள்", asmp1: "பதிலீடு கணக்கிடப்படுவது, ஊழியர் சேமலாப நிதிக்கான (EPF) பங்களிப்பிற்கு எடுத்துக்கொள்ளப்படும் மாதச் சம்பளத்தின் அடிப்படையில் மட்டுமே.", asmp2: "VRS பதிலீட்டு வரம்பு: அதிகபட்சம் ரூ. 5,000,000, குறைந்தபட்சம் ரூ. 900,000.", asmp3: "பாராட்டுத் தொகை (Gratuity): இறுதிச் சம்பளத்தில் 1/2 * நிறைவு செய்யப்பட்ட சேவை ஆண்டுகளின் எண்ணிக்கை.", asmp4: "ETF பங்களிப்பு: அடிப்படைச் சம்பளத்தில் 3% ஆக கணக்கிடப்படுகிறது.", asmp5: "தொடர்ச்சியான சேவை: ஊழியர் 60 வயது வரை பணியாற்றுகிறார்.", asmp6: "நியமிக்கப்பட்ட தேதி (VRS பரிசீலனை தேதி):", asmp7: "வருடாந்திர சம்பள அதிகரிப்பு விகிதம் (%):",
             asmp8: "EPF ஆண்டு இலாபப் பங்கு வீதம் (%):", detailsHeading: "ஊழியர் விவரங்களை உள்ளிடுக", details1: "பிறந்த தேதி:", details2: "சேவையில் இணைந்த தேதி:", details3: "தற்போதைய அடிப்படைச் சம்பளம் (ரூ.):", details4: "சாதாரண சேவை காலம் (ஆண்டுகள்/மாதங்கள்):", details5: "தற்போதைய EPF இருப்பு (ரூ.):", details6: "தற்போதைய ETF இருப்பு (ரூ.):", details7: "தற்போது சபைக்கு செலுத்த வேண்டிய மொத்த கடன் தொகை (ரூ.):", resultsHeading: "ஒப்பீட்டு முடிவுகள்", vrsHeading: "A. விருப்ப ஓய்வுத் திட்டத்தின் (VRS) கீழ் பெறப்படும் தொகை (ரூ.)", vrsTotalComp: "மொத்த பதிலீடு (சூத்திரத்தின் படி):", vrsLimit: "பதிலீட்டு வரம்பு:", vrsApplied: "VRS பதிலீடு (வரம்புக்கு உட்பட்டது):", vrsLoan: "கடன் கொடுப்பனவுகள் மற்றும் கழிவுகள்:", vrsNet: "கடன் தீர்வுக்கான நிகர தொகை (VRS பதிலீட்டில் கடன் தொகையைக் கழித்த பின்):", vrsEpfEtfGrat: "EPF, ETF நிலுவைகள் மற்றும் பாராட்டுத் தொகை மொத்தம்:",
@@ -495,6 +512,7 @@
         document.getElementById('header-title').textContent = t.title;
         document.getElementById('header-h1').textContent = t.title; // H1 heading
         document.getElementById('disclaimer-text').textContent = t.disclaimer; // Disclaimer
+        document.getElementById('data-note-text').textContent = t.dataNote; // NEW: Data Note
         document.getElementById('footer-contact-text').textContent = t.contact; // Footer contact
         document.getElementById('lang-label-select').textContent = t.langSelect;
         document.getElementById('assumptions-heading').textContent = t.assumptionsHeading;
