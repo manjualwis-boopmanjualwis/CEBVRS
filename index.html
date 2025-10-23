@@ -182,15 +182,15 @@
         .negative-loss {
             color: #cc0000 !important; 
         }
-        /* Footer Contact Style - ඔබ ඉල්ලූ පරිදි විශාල හා දීප්තිමත් කර ඇත */
+        /* Footer Contact Style */
         .footer-contact {
             text-align: center;
             margin-top: 40px;
-            padding: 15px 0; /* Padding වැඩි කර ඇත */
+            padding: 15px 0; 
             border-top: 1px solid #ccc;
-            font-size: 1.1em; /* අකුරු විශාල කර ඇත */
-            color: white; /* අකුරු සුදු කර ඇත */
-            background-color: #333; /* දීප්තිමත් පසුබිමක් ලබා දී ඇත */
+            font-size: 1.1em; 
+            color: white; 
+            background-color: #333; 
             font-weight: bold;
         }
         
@@ -297,7 +297,7 @@
     const translations = {
         si: {
             disclaimer: "මෙය හුදෙක් දළ ගණනය කිරීමක් සඳහා පමණි. කිසිදු නෛතික වලංගු භාවයක් නැත.",
-            dataNote: "මෙම වැඩසටහන මගින් ඔබගේ කිසිදු දත්තයක් රඳවා තබා ගන්නේ නැත", // NEW
+            dataNote: "මෙම වැඩසටහන මගින් ඔබගේ කිසිදු දත්තයක් රඳවා තබා ගන්නේ නැත", 
             contact: "අදහස් හා සංස්කරණයන් සඳහා 0702301171 අංකයට WhatsApp පණිවිඩයක් යොමුකරන්න",
             title: "ලංවිම ප්‍රතිලාභ සංසන්දනාත්මක විශ්ලේෂණය",
             langSelect: "භාෂාව තෝරන්න:",
@@ -319,17 +319,19 @@
             details4: "අනියම් සේවා කාලය (වසර/මාස):",
             details5: "EPF දැනට පවතින ශේෂය (Rs.):",
             details6: "ETF දැනට පවතින ශේෂය (Rs.):",
-            details7: "දැනට මණ්ඩලයට ගෙවිය යුතු ණය මුදලෙහි එකතුව (Rs.):",
+            // **වෙනස් කළ ලේබලය**
+            details7: "දැනට මණ්ඩලයට ගෙවිය යුතු ණය මුදලෙහි එකතුව (Rs.): (EPF ණය, Distress Loan, Transport Loan, Book Loan, Festival Advance, ඇතුළුව...)", 
             resultsHeading: "ප්‍රතිඵල සංසන්දනය",
             vrsHeading: "A. ස්වේච්ඡා විශ්‍රාම යාමේ යෝජනා ක්‍රමය (VRS) යටතේ ලැබෙන මුදල (Rs.)",
-            vrsTotalComp: "මුළු වන්දි මුදල (වන්දි සූත්‍රය අනුව):",
-            vrsLimit: "වන්දි සීමාව:",
-            vrsApplied: "VRS වන්දි මුදල (සීමාවට යටත්ව):",
-            vrsLoan: "ණය ගෙවීම් හා අඩුකිරීම්:",
-            vrsNet: "ණය හිලව් වූ පසු අතට ලැබෙන ශුද්ධ මුදල (VRS වන්දි මුදලින් ණය අඩු කළ පසු):",
-            vrsEpfEtfGrat: "EPF, ETF ශේෂයන් සහ Gratuity එකතුව:",
-            vrsTotal: "VRS යටතේ ලැබෙන මුළු ශුද්ධ මුදල:", 
-            vrsNote: "VRS වන්දි මුදලට අමතරව EPF/ETF ශේෂයන් සහ Gratuity ගෙවනු ලැබේ.",
+            vrsTotalComp: "වන්දි මුදල (සීමාවට යටත්ව):",
+            vrsFormulaComp: "මුළු වන්දි මුදල (සූත්‍රය අනුව):",
+            vrsLimit: "වන්දි සීමාව (උපරිමය):",
+            vrsGrat: "Gratuity (පාරිතෝෂිකය):",
+            vrsEpfEtf: "EPF, ETF දැනට පවතින ශේෂයන්:",
+            vrsTotalGross: "VRS යටතේ ලැබෙන මුළු ශුද්ධ මුදල (ණය අඩු කිරීමට පෙර):",
+            vrsLoanDeduct: "ණය ගෙවීම් හා අඩුකිරීම්:",
+            vrsFinalNet: "ණය අඩු කළ පසු අතට ලැබෙන අවසාන මුදල:",
+            vrsNote: "Gratuity සහ EPF/ETF ශේෂයන් වන්දි මුදලට අමතරව ගෙවනු ලැබේ.",
             contFormula: "සූත්‍රය:",
             vrsFormula1: "සේවා වසර < 10: වත්මන් වැටුප x 5 x සම්පූර්ණ සේවා වසර",
             vrsFormula2: "සේවා වසර > 10: (වත්මන් වැටුප x 2 x සම්පූර්ණ සේවා වසර) + (වත්මන් වැටුප x 1.5 x ඉතිරි සම්පූර්ණ සේවා වසර)",
@@ -338,7 +340,7 @@
             contTable1Title: "වසර 60 දී ලැබෙන මුළු අවසාන ප්‍රතිලාභ (Terminal Benefits)",
             contTable1Head: "ප්‍රතිලාභය, අවසාන මුදල (Rs.)",
             contTable1EPF: "EPF අවසාන ශේෂය (සේවක + ආයතන + ලාභාංශ)",
-            contTable1ETF: "ETF අවසාන ශේෂය (ආයතන + ලාභාංශ)",
+            contTable1ETF: "ETF අවසාන ශේෂය (ආයතන)",
             contTable1Gratuity: "Gratuity (පාරිතෝෂිකය)",
             contTable1Total: "මුළු අවසාන ප්‍රතිලාභ එකතුව (EPF, ETF, Gratuity)",
             contTable2Title: "අවුරුදු 60 වන තෙක් වාර්ෂික වැටුප් වර්ධන සහ මුළු ඉපැයීම්",
@@ -353,7 +355,7 @@
             errorJoining: "සේවයට බැඳුණු දිනය VRS දිනයට පෙර විය යුතුය.",
             errorCalculation: "ගණනය කිරීමේ දෝෂයක් සිදුවිය. කරුණාකර සියලුම දත්ත නිවැරදි බවට වග බලා ගන්න.",
             summaryHeading: "C. අවසාන මුදල් සංසන්දනාත්මක සාරාංශය",
-            summaryVRS: "VRS යටතේ ලැබෙන මුළු ශුද්ධ මුදල:",
+            summaryVRS: "VRS යටතේ ලැබෙන මුළු ශුද්ධ මුදල (ණය අඩු කළ පසු):",
             summaryContinue: "අවු. 60 දක්වා සේවය කළහොත් ලැබෙන මුළු ආදායම (වැටුප් + ප්‍රතිලාභ):",
             summaryDifference: "වෙනස (දිගටම සේවය කිරීමේ වාසිය/අවාසිය):",
             summaryVRSBetter: "දිගටම සේවය කිරීමට වඩා VRS ගැනීමෙන් වැඩි මුදලක් ලැබේ.",
@@ -362,16 +364,27 @@
         },
         en: {
             disclaimer: "This is for approximate calculation purposes only. It holds no legal validity.",
-            dataNote: "This program does not retain any of your data", // NEW
+            dataNote: "This program does not retain any of your data", 
             contact: "For comments and suggestions, please WhatsApp 0702301171",
-            title: "CEB Benefit Comparative Analysis", langSelect: "Select Language:", calculateButton: "Calculate Benefits", initialMessage: "Click the button above to view calculations.", assumptionsHeading: "Calculation Assumptions", asmp1: "Compensation is calculated only on the Monthly Salary considered for EPF contribution.", asmp2: "VRS Compensation Limit: Maximum Rs. 5,000,000, Minimum Rs. 900,000.", asmp3: "Gratuity: 1/2 of Last Drawn Salary * No. of Completed Years of Service.", asmp4: "ETF Contribution: Calculated as 3% of the Employee's Basic Salary.", asmp5: "Continued Service: Employee works until the age of 60.", asmp6: "Appointed Date (VRS Consideration Date):", asmp7: "Annual Salary Increment (%):", asmp8: "EPF Annual Dividend Rate (%):", asmp9: "Total Loan Amount Currently Owed to the Board (Rs.):", detailsHeading: "Enter Employee Details", details1: "Date of Birth:", details2: "Date of Joining:", details3: "Current Basic Salary (Rs.):", details4: "Casual Service Period (Years/Months):", details5: "Current EPF Balance (Rs.):", details6: "Current ETF Balance (Rs.):", details7: "Total Loan Amount Currently Owed to the Board (Rs.):", resultsHeading: "Comparison Results", vrsHeading: "A. Amount Received under Voluntary Retirement Scheme (VRS) (Rs.)", vrsTotalComp: "Total Compensation (as per formula):", vrsLimit: "Compensation Limit:", vrsApplied: "VRS Compensation (Subject to Limit):", vrsLoan: "Loan Payments and Deductions:", vrsNet: "Net Amount Received after Loan Settlement (VRS Compensation minus Loan):", vrsEpfEtfGrat: "EPF, ETF Balances and Gratuity Total:",
-            vrsTotal: "Total Net Amount Received under VRS:", 
-            vrsNote: "EPF/ETF balances and Gratuity are paid in addition to the VRS compensation.", 
+            title: "CEB Benefit Comparative Analysis", langSelect: "Select Language:", calculateButton: "Calculate Benefits", initialMessage: "Click the button above to view calculations.", assumptionsHeading: "Calculation Assumptions", asmp1: "Compensation is calculated only on the Monthly Salary considered for EPF contribution.", asmp2: "VRS Compensation Limit: Maximum Rs. 5,000,000, Minimum Rs. 900,000.", asmp3: "Gratuity: 1/2 of Last Drawn Salary * No. of Completed Years of Service.", asmp4: "ETF Contribution: Calculated as 3% of the Employee's Basic Salary.", asmp5: "Continued Service: Employee works until the age of 60.", asmp6: "Appointed Date (VRS Consideration Date):", asmp7: "Annual Salary Increment (%):", asmp8: "EPF Annual Dividend Rate (%):", detailsHeading: "Enter Employee Details", details1: "Date of Birth:", details2: "Date of Joining:", details3: "Current Basic Salary (Rs.):", details4: "Casual Service Period (Years/Months):", details5: "Current EPF Balance (Rs.):", details6: "Current ETF Balance (Rs.):",
+            // **වෙනස් කළ ලේබලය**
+            details7: "Total Loan Amount Currently Owed to the Board (Rs.): (Including EPF Loans, Distress Loan, Transport Loan, Book Loan, Festival Advance, etc...)",
+            resultsHeading: "Comparison Results",
+            vrsHeading: "A. Amount Received under Voluntary Retirement Scheme (VRS) (Rs.)", 
+            vrsTotalComp: "Compensation Amount (Subject to Limit):",
+            vrsFormulaComp: "Total Compensation (as per formula):",
+            vrsLimit: "Compensation Limit (Maximum):",
+            vrsGrat: "Gratuity Payment:",
+            vrsEpfEtf: "EPF, ETF Current Balances:",
+            vrsTotalGross: "Total Gross Amount Received under VRS (Before Loan Deduction):",
+            vrsLoanDeduct: "Loan Payments and Deductions:",
+            vrsFinalNet: "Final Net Amount Received after Loan Deduction:",
+            vrsNote: "Gratuity and EPF/ETF balances are paid in addition to the VRS compensation.", 
             contFormula: "Formula:",
             vrsFormula1: "Service Years < 10: Current Salary x 5 x Completed Service Years",
             vrsFormula2: "Service Years > 10: (Current Salary x 2 x Completed Service Years) + (Current Salary x 1.5 x Remaining Completed Service Years)",
             gratFormula: "Final Salary x 0.5 x Completed Service Years",
-            continueHeading: "B. Total Earnings by Continuing Service until Age 60", contTable1Title: "Total Terminal Benefits Received at Age 60", contTable1Head: "Benefit, Final Amount (Rs.)", contTable1EPF: "EPF Final Balance (Employee + Employer + Dividend)", contTable1ETF: "ETF Final Balance (Employer + Dividend)", contTable1Gratuity: "Gratuity Payment", contTable1Total: "Total Terminal Benefits (EPF, ETF, Gratuity)", contTable2Title: "Annual Salary Increments and Total Earnings until Age 60", contTable2Head: "Year, Age, Opening Basic Salary (Rs.), Annual Salary Increase (Rs.), Total Basic Salary for the Year (Rs.)", contTable2TotalSalary: "Total Gross Basic Salary Earned (VRS Date to Age 60)", contTable3Title: "Annual Calculations for Continued Service (EPF/ETF Table)", contTable3Head: "Year, Age, Basic Salary (Rs.), EPF Opening Balance (Rs.), New EPF Contribution (Rs.), EPF Dividend (Rs.), EPF Closing Balance (Rs.)",
+            continueHeading: "B. Total Earnings by Continuing Service until Age 60", contTable1Title: "Total Terminal Benefits Received at Age 60", contTable1Head: "Benefit, Final Amount (Rs.)", contTable1EPF: "EPF Final Balance (Employee + Employer + Dividend)", contTable1ETF: "ETF Final Balance (Employer)", contTable1Gratuity: "Gratuity Payment", contTable1Total: "Total Terminal Benefits (EPF, ETF, Gratuity)", contTable2Title: "Annual Salary Increments and Total Earnings until Age 60", contTable2Head: "Year, Age, Opening Basic Salary (Rs.), Annual Salary Increase (Rs.), Total Basic Salary for the Year (Rs.)", contTable2TotalSalary: "Total Gross Basic Salary Earned (VRS Date to Age 60)", contTable3Title: "Annual Calculations for Continued Service (EPF/ETF Table)", contTable3Head: "Year, Age, Basic Salary (Rs.), EPF Opening Balance (Rs.), New EPF Contribution (Rs.), EPF Dividend (Rs.), EPF Closing Balance (Rs.)",
             errorRequired: "Please fill in all required fields (with red borders).",
             errorDate: "Invalid date format (yyyy-mm-dd) or invalid date. Please select from the calendar.",
             errorSalary: "Current Salary must be greater than Rs. 1000.",
@@ -379,7 +392,7 @@
             errorJoining: "Joining Date must be before the VRS Date.",
             errorCalculation: "A calculation error occurred. Please ensure all data is correct.",
             summaryHeading: "C. Final Financial Comparison Summary",
-            summaryVRS: "Total Net Amount Received under VRS:",
+            summaryVRS: "Total Net Amount Received under VRS (After Loan Deduction):",
             summaryContinue: "Total Income if Continued Service until Age 60 (Salary + Benefits):",
             summaryDifference: "Difference (Advantage/Disadvantage of Continuing Service):",
             summaryVRSBetter: "VRS yields a higher total amount than continuing service.",
@@ -388,17 +401,28 @@
         },
         ta: {
             disclaimer: "இது தோராயமான கணக்கீட்டு நோக்கங்களுக்காக மட்டுமே. இதற்கு எந்த சட்டப்பூர்வ செல்லுபடியும் இல்லை.",
-            dataNote: "இந்த நிகழ்ச்சி நிரலால் உங்கள் தரவுகள் எதுவும் தக்கவைக்கப்படுவதில்லை", // NEW
+            dataNote: "இந்த நிகழ்ச்சி நிரலால் உங்கள் தரவுகள் எதுவும் தக்கவைக்கப்படுவதில்லை", 
             contact: "கருத்துகள் மற்றும் திருத்தங்களுக்கு, 0702301171 என்ற எண்ணுக்கு WhatsApp செய்தி அனுப்பவும்",
             title: "இலங்கை மின்சார சபையின் பயன் ஒப்பீட்டு பகுப்பாய்வு", langSelect: "மொழியைத் தெரிவுசெய்:", calculateButton: "நன்மைகளைக் கணக்கிடுக", initialMessage: "கணக்கீடுகளைப் பார்க்க மேலே உள்ள பொத்தானை அழுத்தவும்.", assumptionsHeading: "கணக்கீட்டு அனுமானங்கள்", asmp1: "பதிலீடு கணக்கிடப்படுவது, ஊழியர் சேமலாப நிதிக்கான (EPF) பங்களிப்பிற்கு எடுத்துக்கொள்ளப்படும் மாதச் சம்பளத்தின் அடிப்படையில் மட்டுமே.", asmp2: "VRS பதிலீட்டு வரம்பு: அதிகபட்சம் ரூ. 5,000,000, குறைந்தபட்சம் ரூ. 900,000.", asmp3: "பாராட்டுத் தொகை (Gratuity): இறுதிச் சம்பளத்தில் 1/2 * நிறைவு செய்யப்பட்ட சேவை ஆண்டுகளின் எண்ணிக்கை.", asmp4: "ETF பங்களிப்பு: அடிப்படைச் சம்பளத்தில் 3% ஆக கணக்கிடப்படுகிறது.", asmp5: "தொடர்ச்சியான சேவை: ஊழியர் 60 வயது வரை பணியாற்றுகிறார்.", asmp6: "நியமிக்கப்பட்ட தேதி (VRS பரிசீலனை தேதி):", asmp7: "வருடாந்திர சம்பள அதிகரிப்பு விகிதம் (%):",
-            asmp8: "EPF ஆண்டு இலாபப் பங்கு வீதம் (%):", detailsHeading: "ஊழியர் விவரங்களை உள்ளிடுக", details1: "பிறந்த தேதி:", details2: "சேவையில் இணைந்த தேதி:", details3: "தற்போதைய அடிப்படைச் சம்பளம் (ரூ.):", details4: "சாதாரண சேவை காலம் (ஆண்டுகள்/மாதங்கள்):", details5: "தற்போதைய EPF இருப்பு (ரூ.):", details6: "தற்போதைய ETF இருப்பு (ரூ.):", details7: "தற்போது சபைக்கு செலுத்த வேண்டிய மொத்த கடன் தொகை (ரூ.):", resultsHeading: "ஒப்பீட்டு முடிவுகள்", vrsHeading: "A. விருப்ப ஓய்வுத் திட்டத்தின் (VRS) கீழ் பெறப்படும் தொகை (ரூ.)", vrsTotalComp: "மொத்த பதிலீடு (சூத்திரத்தின் படி):", vrsLimit: "பதிலீட்டு வரம்பு:", vrsApplied: "VRS பதிலீடு (வரம்புக்கு உட்பட்டது):", vrsLoan: "கடன் கொடுப்பனவுகள் மற்றும் கழிவுகள்:", vrsNet: "கடன் தீர்வுக்கான நிகர தொகை (VRS பதிலீட்டில் கடன் தொகையைக் கழித்த பின்):", vrsEpfEtfGrat: "EPF, ETF நிலுவைகள் மற்றும் பாராட்டுத் தொகை மொத்தம்:",
-            vrsTotal: "VRS இன் கீழ் பெறப்படும் மொத்த நிகர தொகை:", 
-            vrsNote: "VRS பதிலீட்டுடன் EPF/ETF நிலுவைகளும் மற்றும் பாராட்டுத் தொகையும் செலுத்தப்படும்.", 
+            asmp8: "EPF ஆண்டு இலாபப் பங்கு வீதம் (%):", detailsHeading: "ஊழியர் விவரங்களை உள்ளிடுக", details1: "பிறந்த தேதி:", details2: "சேவையில் இணைந்த தேதி:", details3: "தற்போதைய அடிப்படைச் சம்பளம் (ரூ.):", details4: "சாதாரண சேவை காலம் (ஆண்டுகள்/மாதங்கள்):", details5: "தற்போதைய EPF இருப்பு (ரூ.):", details6: "தற்போதைய ETF இருப்பு (ரூ.):",
+            // **වෙනස් කළ ලේබලය**
+            details7: "தற்போது சபைக்கு செலுத்த வேண்டிய மொத்த கடன் தொகை (ரூ.): (EPF கடன்கள், Distress கடன், போக்குவரத்து கடன், புத்தக கடன், விழா முன்பணம், உள்ளிட்ட...)",
+            resultsHeading: "ஒப்பீட்டு முடிவுகள்", 
+            vrsHeading: "A. விருப்ப ஓய்வுத் திட்டத்தின் (VRS) கீழ் பெறப்படும் தொகை (ரூ.)", 
+            vrsTotalComp: "பதிலீட்டுத் தொகை (வரம்புக்கு உட்பட்டது):",
+            vrsFormulaComp: "மொத்த பதிலீட்டுத் தொகை (சூத்திரத்தின் படி):",
+            vrsLimit: "பதிலீட்டு வரம்பு (அதிகபட்சம்):",
+            vrsGrat: "பாராட்டுத் தொகை (Gratuity):",
+            vrsEpfEtf: "EPF, ETF தற்போதைய நிலுவைகள்:",
+            vrsTotalGross: "VRS இன் கீழ் பெறப்படும் மொத்தத் தொகை (கடன் கழிப்பதற்கு முன்):",
+            vrsLoanDeduct: "கடன் கொடுப்பனவுகள் மற்றும் கழிவுகள்:",
+            vrsFinalNet: "கடன் கழித்த பின் பெறப்படும் இறுதி நிகர தொகை:",
+            vrsNote: "VRS பதிலீட்டுடன் பாராட்டுத் தொகையும் EPF/ETF நிலுவைகளும் செலுத்தப்படும்.",
             contFormula: "சூத்திரம்:",
             vrsFormula1: "சேவை ஆண்டுகள் < 10: தற்போதைய சம்பளம் x 5 x நிறைவு செய்யப்பட்ட சேவை ஆண்டுகள்",
             vrsFormula2: "சேவை ஆண்டுகள் > 10: (தற்போதைய சம்பளம் x 2 x நிறைவு செய்யப்பட்ட சேவை ஆண்டுகள்) + (தற்போதைய சம்பளம் x 1.5 x மீதமுள்ள நிறைவு செய்யப்பட்ட சேவை ஆண்டுகள்)",
             gratFormula: "இறுதிச் சம்பளம் x 0.5 x நிறைவு செய்யப்பட்ட சேவை ஆண்டுகள்",
-            continueHeading: "B. 60 வயது வரை தொடர்ந்து சேவை செய்வதன் மூலம் பெறப்படும் மொத்த வருமானம்", contTable1Title: "60 வயதில் பெறப்படும் மொத்த இறுதி நன்மைகள் (Terminal Benefits)", contTable1Head: "பயன், இறுதித் தொகை (ரூ.)", contTable1EPF: "EPF இறுதி இருப்பு (ஊழியர் + நிறுவனம் + இலாபப் பங்கு)", contTable1ETF: "ETF இறுதி இருப்பு (நிறுவனம் + இலாபப் பங்கு)", contTable1Gratuity: "பாராட்டுத் தொகை (Gratuity)", contTable1Total: "மொத்த අවසාන ප්‍රතිලාභ එකතුව (EPF, ETF, Gratuity)", contTable2Title: "60 வயது வரை ஆண்டு சம்பள அதிகரிப்புகள் மற்றும் மொத்த வருமானம்", contTable2Head: "ஆண்டு, வயது, தொடக்க அடிப்படைச் சம்பளம் (ரூ.), ஆண்டு சம்பள அதிகரிப்பு (ரூ.), ஆண்டுக்கான மொத்த அடிப்படைச் சம்பளம் (ரூ.)", contTable2TotalSalary: "மொத்த அடிப்படைச் சம்பளம் (VRS தேதியிலிருந்து 60 வயது வரை)", contTable3Title: "தொடர்ச்சியான சேவையின் வருடாந்திர கணக்கீடுகள் (EPF/ETF அட்டவணை)", contTable3Head: "ஆண்டு, வயது, அடிப்படைச் சம்பளம் (ரூ.), EPF தொடக்க இருப்பு (ரூ.), புதிய EPF பங்களிப்பு (ரூ.), EPF இலாபப் பங்கு (ரூ.), EPF இறுதி இருப்பு (ரூ.)",
+            continueHeading: "B. 60 வயது வரை தொடர்ந்து சேவை செய்வதன் மூலம் பெறப்படும் மொத்த வருமானம்", contTable1Title: "60 வயதில் பெறப்படும் மொத்த இறுதி நன்மைகள் (Terminal Benefits)", contTable1Head: "பயன், இறுதித் தொகை (ரூ.)", contTable1EPF: "EPF இறுதி இருப்பு (ஊழியர் + நிறுவனம் + இலாபப் பங்கு)", contTable1ETF: "ETF இறுதி இருப்பு (நிறுவனம்)", contTable1Gratuity: "பாராட்டுத் தொகை (Gratuity)", contTable1Total: "மொத்த අවසාන ප්‍රතිලාභ එකතුව (EPF, ETF, Gratuity)", contTable2Title: "60 வயது வரை ஆண்டு சம்பள அதிகரிப்புகள் மற்றும் மொத்த வருமானம்", contTable2Head: "ஆண்டு, வயது, தொடக்க அடிப்படைச் சம்பளம் (ரூ.), ஆண்டு சம்பள அதிகரிப்பு (ரூ.), ஆண்டுக்கான மொத்த அடிப்படைச் சம்பளம் (ரூ.)", contTable2TotalSalary: "மொத்த அடிப்படைச் சம்பளம் (VRS தேதியிலிருந்து 60 வயது வரை)", contTable3Title: "தொடர்ச்சியான சேவையின் வருடாந்திர கணக்கீடுகள் (EPF/ETF அட்டவணை)", contTable3Head: "ஆண்டு, வயது, அடிப்படைச் சம்பளம் (ரூ.), EPF தொடக்க இருப்பு (ரூ.), புதிய EPF பங்களிப்பு (ரூ.), EPF இலாபப் பங்கு (ரூ.), EPF இறுதி இருப்பு (ரூ.)",
             errorRequired: "தேவையான அனைத்து துறைகளையும் (சிவப்பு எல்லைகளுடன்) நிரப்பவும்.",
             errorDate: "தவறான திகதி வடிவம் (yyyy-mm-dd) அல்லது தவறான திகதி. நாட்காட்டியில் இருந்து தெரிவு செய்யவும்.",
             errorSalary: "தற்போதைய சம்பளம் ரூ. 1000 ஐ விட அதிகமாக இருக்க வேண்டும்.",
@@ -406,7 +430,7 @@
             errorJoining: "சேர்ந்த தேதி VRS தேதிக்கு முன் இருக்க வேண்டும்.",
             errorCalculation: "கணக்கீட்டுப் பிழை ஏற்பட்டது. எல்லா தரவுகளும் சரியாக உள்ளதா என்பதை உறுதிப்படுத்தவும்.",
             summaryHeading: "C. இறுதி நிதி ஒப்பீட்டு சுருக்கம்",
-            summaryVRS: "VRS இன் கீழ் பெறப்படும் மொத்த நிகர தொகை:",
+            summaryVRS: "VRS இன் கீழ் பெறப்படும் மொத்த நிகர தொகை (கடன் கழித்த பின்):",
             summaryContinue: "60 வயது வரை தொடர்ந்து பணியாற்றினால் மொத்த வருமானம் (சம்பளம் + நன்மைகள்):",
             summaryDifference: "வித்தியாசம் (தொடர்ந்து பணியாற்றுவதன் நன்மை/தீமை):",
             summaryVRSBetter: "தொடர்ந்து பணியாற்றுவதை விட VRS பெறுவது அதிக மொத்த தொகையை வழங்குகிறது.",
@@ -512,7 +536,7 @@
         document.getElementById('header-title').textContent = t.title;
         document.getElementById('header-h1').textContent = t.title; // H1 heading
         document.getElementById('disclaimer-text').textContent = t.disclaimer; // Disclaimer
-        document.getElementById('data-note-text').textContent = t.dataNote; // NEW: Data Note
+        document.getElementById('data-note-text').textContent = t.dataNote; // Data Note
         document.getElementById('footer-contact-text').textContent = t.contact; // Footer contact
         document.getElementById('lang-label-select').textContent = t.langSelect;
         document.getElementById('assumptions-heading').textContent = t.assumptionsHeading;
@@ -537,7 +561,7 @@
         document.getElementById('details-4').textContent = t.details4;
         document.getElementById('details-5').textContent = t.details5;
         document.getElementById('details-6').textContent = t.details6;
-        document.getElementById('details-7').textContent = t.details7; // Loan
+        document.getElementById('details-7').textContent = t.details7; // Loan - UPDATED
 
         // Font adjustment
         if (lang === 'ta') {
@@ -672,20 +696,21 @@
             // Now, floor it to get only completed remaining years (as requested by user)
             const completedRemainingServiceYears = Math.max(0, Math.floor(yearsToRetirement));
 
-            let totalVrsCompensation = 0;
+            let totalVrsCompensationFormula = 0; // Value based on formula
             let vrsFormulaDisplay;
 
             if (completedVrsYears < 10) {
                 // Use Completed Years
-                totalVrsCompensation = currentSalary * 5 * completedVrsYears;
+                totalVrsCompensationFormula = currentSalary * 5 * completedVrsYears;
                 vrsFormulaDisplay = `${t.vrsFormula1} = ${formatNumberForFormula(currentSalary)} x 5 x ${completedVrsYears}`;
             } else {
                 // Use Completed Years for both parts
-                totalVrsCompensation = (currentSalary * 2 * completedVrsYears) + (currentSalary * 1.5 * completedRemainingServiceYears);
+                totalVrsCompensationFormula = (currentSalary * 2 * completedVrsYears) + (currentSalary * 1.5 * completedRemainingServiceYears);
                 vrsFormulaDisplay = `${t.vrsFormula2} = (${formatNumberForFormula(currentSalary)} x 2 x ${completedVrsYears}) + (${formatNumberForFormula(currentSalary)} x 1.5 x ${completedRemainingServiceYears})`;
             }
             
-            let appliedVrsCompensation = Math.min(VRS_MAX_LIMIT, Math.max(VRS_MIN_LIMIT, totalVrsCompensation));
+            // The compensation applied (subject to max/min limits)
+            let appliedVrsCompensation = Math.min(VRS_MAX_LIMIT, Math.max(VRS_MIN_LIMIT, totalVrsCompensationFormula));
             
             // Gratuity calculation for VRS (uses completed years)
             const vrsGratuityResult = calculateGratuity(currentSalary, vrsServiceYearsDecimal, casualYears, casualMonths);
@@ -693,11 +718,11 @@
             const vrsGratuityFormulaDisplay = `${t.gratFormula} = ${formatNumberForFormula(currentSalary)} x 0.5 x ${vrsGratuityResult.completedYears}`;
 
 
-            const vrsNetCompensation = appliedVrsCompensation - loanDeduction;
+            // Total Payout BEFORE Loan Deduction = VRS Compensation + Gratuity + EPF Balance + ETF Balance 
+            const vrsTotalGrossPayout = appliedVrsCompensation + vrsGratuity + currentEpfBalance + currentEtfBalance;
             
-            // Total Payout under VRS = (VRS Compensation - Loan) + EPF Balance + ETF Balance + Gratuity
-            const vrsEpfEtfGratuityTotal = currentEpfBalance + currentEtfBalance + vrsGratuity;
-            const vrsFinalTotal = vrsNetCompensation + vrsEpfEtfGratuityTotal;
+            // Final Net Payout AFTER Loan Deduction
+            const vrsFinalNet = vrsTotalGrossPayout - loanDeduction;
 
 
             // --- 5. Continued Service Scenario Calculation (B) ---
@@ -742,8 +767,8 @@
                     const epfDividendAmount = projectedEpf * epfDividendRate;
                     const epfClosingBalance = projectedEpf + newEpfContribution + epfDividendAmount;
 
-                    const etfDividendAmount = projectedEtf * epfDividendRate; 
-                    const etfClosingBalance = projectedEtf + newEtfContribution + etfDividendAmount;
+                    // ETF: No Dividend (as requested)
+                    const etfClosingBalance = projectedEtf + newEtfContribution; 
 
                     annualEpfCalculations.push({
                         year: year,
@@ -788,46 +813,48 @@
             // --- 6. Format and Display Results ---
             let html = '';
 
-            // --- A. VRS Results ---
+            // --- A. VRS Results (Updated Structure) ---
             html += `<div class="vrs-box">
                         <h3 id="vrs-heading">${t.vrsHeading} (${appointedDate.toLocaleDateString('si-LK', { year: 'numeric', month: 'numeric', day: 'numeric' })})</h3>
                         <table>
                             <tr>
-                                <td id="vrs-total-comp">${t.vrsTotalComp}</td>
-                                <td>${formatCurrency(totalVrsCompensation)}
+                                <td id="vrs-formula-comp" style="width: 70%;">${t.vrsFormulaComp}</td>
+                                <td>${formatCurrency(totalVrsCompensationFormula)}
                                     <div class="formula">${t.contFormula} ${vrsFormulaDisplay}</div>
                                 </td>
                             </tr>
                             <tr>
                                 <td id="vrs-limit" class="vrs-limit">${t.vrsLimit} (Rs. 5,000,000)</td>
-                                <td class="vrs-limit">${formatCurrency(appliedVrsCompensation)}</td>
-                            </tr>
-                            <tr>
-                                <td id="vrs-loan">${t.vrsLoan}</td>
-                                <td>${formatCurrency(loanDeduction)}</td>
+                                <td class="vrs-limit">${formatCurrency(VRS_MAX_LIMIT)}</td>
                             </tr>
                             <tr class="highlight">
-                                <td id="vrs-net">${t.vrsNet}</td>
-                                <td >${formatCurrency(vrsNetCompensation)}</td>
+                                <td id="vrs-total-comp">${t.vrsTotalComp}</td>
+                                <td>${formatCurrency(appliedVrsCompensation)}</td>
                             </tr>
-                        </table>
-                        <p id="vrs-note" style="font-style: italic; margin-top: 15px;">${t.vrsNote}</p>
-                        <table>
-                             <tr>
-                                <td><strong>Gratuity (පාරිතෝෂිකය):</strong></td>
+                            <tr>
+                                <td id="vrs-grat">${t.vrsGrat}</td>
                                 <td>${formatCurrency(vrsGratuity)}
                                     <div class="formula">${t.contFormula} ${vrsGratuityFormulaDisplay}</div>
                                 </td>
                             </tr>
                             <tr>
-                                <td id="vrs-epfetfgrat"><strong>${t.vrsEpfEtfGrat}</strong></td>
-                                <td>${formatCurrency(vrsEpfEtfGratuityTotal)}</td>
+                                <td id="vrs-epfetf">${t.vrsEpfEtf}</td>
+                                <td>${formatCurrency(currentEpfBalance + currentEtfBalance)}</td>
+                            </tr>
+                            <tr style="border-top: 2px solid #004d99;">
+                                <td id="vrs-total-gross"><strong>${t.vrsTotalGross}</strong></td>
+                                <td class="vrs-net"><strong>${formatCurrency(vrsTotalGrossPayout)}</strong></td>
+                            </tr>
+                            <tr>
+                                <td id="vrs-loan-deduct" style="color: red;"><strong>${t.vrsLoanDeduct}</strong></td>
+                                <td style="color: red;"><strong>- ${formatCurrency(loanDeduction)}</strong></td>
                             </tr>
                             <tr class="highlight">
-                                <td id="vrs-total" class="vrs-net"><strong>${t.vrsTotal}</strong></td>
-                                <td class="vrs-net"><strong>${formatCurrency(vrsFinalTotal)}</strong></td>
+                                <td id="vrs-final-net" class="vrs-net"><strong>${t.vrsFinalNet}</strong></td>
+                                <td class="vrs-net"><strong>${formatCurrency(vrsFinalNet)}</strong></td>
                             </tr>
                         </table>
+                        <p id="vrs-note" style="font-style: italic; margin-top: 15px;">${t.vrsNote}</p>
                     </div>`;
 
             // --- B. Continued Service Results ---
@@ -894,17 +921,17 @@
                                     <td>${row.year}</td>
                                     <td>${row.age}</td>
                                     <td>${formatCurrency(row.salary)}</td>
-                                    <td>${formatCurrency(row.epfOpening)}</td>
-                                    <td>${formatCurrency(row.epfNewCont)}</td>
-                                    <td>${formatCurrency(row.epfDividend)}</td>
-                                    <td>${formatCurrency(row.epfClosing)}</td>
+                                    <td>${row.epfOpening.toFixed(2)}</td>
+                                    <td>${row.epfNewCont.toFixed(2)}</td>
+                                    <td>${row.epfDividend.toFixed(2)}</td>
+                                    <td>${row.epfClosing.toFixed(2)}</td>
                                 </tr>
                             `).join('')}
                         </table>
                     </div>`;
                     
             // --- C. Comparison Summary ---
-            const difference = continueFinalTotal - vrsFinalTotal;
+            const difference = continueFinalTotal - vrsFinalNet;
             const diffClass = difference >= 0 ? 'positive-gain' : 'negative-loss';
             const betterOption = difference >= 0 ? t.summaryContBetter : t.summaryVRSBetter;
             const comparisonSign = difference >= 0 ? '+' : ''; // Add '+' sign for positive difference
@@ -914,7 +941,7 @@
                         <table>
                             <tr>
                                 <td id="summary-vrs-label" style="width: 70%;"><strong>${t.summaryVRS}</strong></td>
-                                <td style="text-align: right;">${formatCurrency(vrsFinalTotal)}</td>
+                                <td style="text-align: right;">${formatCurrency(vrsFinalNet)}</td>
                             </tr>
                             <tr>
                                 <td id="summary-continue-label"><strong>${t.summaryContinue}</strong></td>
