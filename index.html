@@ -46,6 +46,16 @@
             margin-bottom: 20px;
             text-align: center;
         }
+        
+        /* Red Assumption Note Style */
+        .assumption-note {
+            color: #d9534f; /* Red */
+            font-weight: bold;
+            font-size: 1.0em;
+            margin-top: 10px;
+            padding-top: 5px;
+            border-top: 1px dashed #ccc;
+        }
 
         h1 {
             color: #004d99;
@@ -228,6 +238,8 @@
             <li id="asmp-4">ETF දායකත්වය: සේවකයාගේ මූලික වැටුපෙන් 3%ක් ලෙස ගණනය කෙරේ.</li>
             <li id="asmp-5">දිගටම සේවය කිරීමේදී: සේවකයා වයස අවුරුදු 60 දක්වා සේවය කරයි.</li>
         </ul>
+        
+        <p class="assumption-note" id="assumption-note-text">පහත කරුණු උපකල්පන පමණි. අවශ්‍ය පරිදි වෙනස් කර උත්සාහ කර බැලිය හැක.</p>
 
         <label id="asmp-6">නියමිත දිනය (Appointed Date - VRS සලකා බලන දින):</label>
         <div class="input-group">
@@ -309,6 +321,7 @@
             asmp3: "Gratuity (පාරිතෝෂිකය): අවසාන වැටුපෙන් 1/2ක් * සම්පූර්ණ කළ සේවා වසර ගණන.",
             asmp4: "ETF දායකත්වය: සේවකයාගේ මූලික වැටුපෙන් 3%ක් ලෙස ගණනය කෙරේ.",
             asmp5: "දිගටම සේවය කිරීමේදී: සේවකයා වයස අවුරුදු 60 දක්වා සේවය කරයි.",
+            assumptionsNote: "පහත කරුණු උපකල්පන පමණි. අවශ්‍ය පරිදි වෙනස් කර උත්සාහ කර බැලිය හැක.", // NEW
             asmp6: "නියමිත දිනය (Appointed Date - VRS සලකා බලන දින):",
             asmp7: "වාර්ෂික වැටුප් වර්ධන ප්‍රතිශතය (%):",
             asmp8: "EPF වාර්ෂික ලාභාංශ ප්‍රතිශතය (%):",
@@ -341,11 +354,11 @@
             contTable1ETF: "ETF අවසාන ශේෂය (ආයතන)",
             contTable1Gratuity: "Gratuity (පාරිතෝෂිකය)",
             contTable1Total: "මුළු අවසාන ප්‍රතිලාභ එකතුව (EPF, ETF, Gratuity)",
-            contTable1LoanDeduct: "ණය ගෙවීම් හා අඩුකිරීම් (මණ්ඩලයට)", // NEW
-            contTable1NetTotal: "ණය අඩු කළ පසු අවසාන ප්‍රතිලාභ ශුද්ධ මුදල:", // NEW
-            contTable2Title: "අවුරුදු 60 වන තෙක් වාර්ෂික වැටුප් වර්ධන සහ මුළු ශුද්ධ වැටුප් ඉපැයීම්", // UPDATED
-            contTable2Head: "වර්ෂය, වයස, ආරම්භක මූලික වැටුප (Rs.), මාසික ශුද්ධ වැටුප (EPF 10% අඩු කළ පසු), වර්ෂයේ මුළු ශුද්ධ වැටුප (Rs.)", // UPDATED - removed annual increment, added net monthly and net yearly
-            contTable2TotalSalary: "VRS දින සිට අවු. 60 දක්වා උපයා ගන්නා මුළු ශුද්ධ වැටුප (Total Net Salary)", // UPDATED
+            contTable1LoanDeduct: "ණය ගෙවීම් හා අඩුකිරීම් (මණ්ඩලයට)",
+            contTable1NetTotal: "ණය අඩු කළ පසු අවසාන ප්‍රතිලාභ ශුද්ධ මුදල:",
+            contTable2Title: "අවුරුදු 60 වන තෙක් වාර්ෂික වැටුප් වර්ධන සහ මුළු ශුද්ධ වැටුප් ඉපැයීම්",
+            contTable2Head: "වර්ෂය, වයස, ආරම්භක මූලික වැටුප (Rs.), මාසික ශුද්ධ වැටුප (EPF 10% අඩු කළ පසු), වර්ෂයේ මුළු ශුද්ධ වැටුප (Rs.)",
+            contTable2TotalSalary: "VRS දින සිට අවු. 60 දක්වා උපයා ගන්නා මුළු ශුද්ධ වැටුප (Total Net Salary)",
             contTable3Title: "අඛණ්ඩ සේවයේ වාර්ෂික ගණනය කිරීම් (EPF/ETF වගුව)",
             contTable3Head: "වර්ෂය, වයස, මූලික වැටුප (Rs.), EPF ආරම්භක ශේෂය (Rs.), නව EPF දායකත්වය (Rs.), EPF ලාභාංශය (Rs.), EPF අවසාන ශේෂය (Rs.)",
             errorRequired: "කරුණාකර සියලුම අත්‍යාවශ්‍ය ක්ෂේත්‍ර (රතු මායිම් සහිත) පුරවන්න.",
@@ -356,17 +369,19 @@
             errorCalculation: "ගණනය කිරීමේ දෝෂයක් සිදුවිය. කරුණාකර සියලුම දත්ත නිවැරදි බවට වග බලා ගන්න.",
             summaryHeading: "C. අවසාන මුදල් සංසන්දනාත්මක සාරාංශය",
             summaryVRS: "VRS යටතේ ලැබෙන මුළු ශුද්ධ මුදල (ණය අඩු කළ පසු):",
-            summaryContinue: "අවු. 60 දක්වා සේවය කළහොත් ලැබෙන මුළු ආදායම (ශුද්ධ වැටුප් + ශුද්ධ ප්‍රතිලාභ):", // UPDATED
+            summaryContinue: "අවු. 60 දක්වා සේවය කළහොත් ලැබෙන මුළු ආදායම (ශුද්ධ වැටුප් + ශුද්ධ ප්‍රතිලාභ):",
             summaryDifference: "වෙනස (දිගටම සේවය කිරීමේ වාසිය/අවාසිය):",
             summaryVRSBetter: "දිගටම සේවය කිරීමට වඩා VRS ගැනීමෙන් වැඩි මුදලක් ලැබේ.",
             summaryContBetter: "VRS ගැනීමට වඩා දිගටම සේවය කිරීමෙන් වැඩි මුදලක් ලැබේ.",
-            contFinalTotalLabel: "හි මුළු ඉපැයීම (Net Terminal Benefits + Total Net Salary): " // UPDATED
+            contFinalTotalLabel: "හි මුළු ඉපැයීම (Net Terminal Benefits + Total Net Salary): "
         },
         en: {
             disclaimer: "This is for approximate calculation purposes only. It holds no legal validity.",
             dataNote: "This program does not retain any of your data", 
             contact: "For comments and suggestions, please WhatsApp 0702301171",
-            title: "CEB Benefit Comparative Analysis", langSelect: "Select Language:", calculateButton: "Calculate Benefits", initialMessage: "Click the button above to view calculations.", assumptionsHeading: "Calculation Assumptions", asmp1: "Compensation is calculated only on the Monthly Salary considered for EPF contribution.", asmp2: "VRS Compensation Limit: Maximum Rs. 5,000,000, Minimum Rs. 900,000.", asmp3: "Gratuity: 1/2 of Last Drawn Salary * No. of Completed Years of Service.", asmp4: "ETF Contribution: Calculated as 3% of the Employee's Basic Salary.", asmp5: "Continued Service: Employee works until the age of 60.", asmp6: "Appointed Date (VRS Consideration Date):", asmp7: "Annual Salary Increment (%):", asmp8: "EPF Annual Dividend Rate (%):", detailsHeading: "Enter Employee Details", details1: "Date of Birth:", details2: "Date of Joining:", details3: "Current Basic Salary (Rs.):", details4: "Casual Service Period (Years/Months):", details5: "Current EPF Balance (Rs.):", details6: "Current ETF Balance (Rs.):",
+            title: "CEB Benefit Comparative Analysis", langSelect: "Select Language:", calculateButton: "Calculate Benefits", initialMessage: "Click the button above to view calculations.", assumptionsHeading: "Calculation Assumptions", asmp1: "Compensation is calculated only on the Monthly Salary considered for EPF contribution.", asmp2: "VRS Compensation Limit: Maximum Rs. 5,000,000, Minimum Rs. 900,000.", asmp3: "Gratuity: 1/2 of Last Drawn Salary * No. of Completed Years of Service.", asmp4: "ETF Contribution: Calculated as 3% of the Employee's Basic Salary.", asmp5: "Continued Service: Employee works until the age of 60.",
+            assumptionsNote: "The following points are assumptions only. You can change and try as required.", // NEW
+            asmp6: "Appointed Date (VRS Consideration Date):", asmp7: "Annual Salary Increment (%):", asmp8: "EPF Annual Dividend Rate (%):", detailsHeading: "Enter Employee Details", details1: "Date of Birth:", details2: "Date of Joining:", details3: "Current Basic Salary (Rs.):", details4: "Casual Service Period (Years/Months):", details5: "Current EPF Balance (Rs.):", details6: "Current ETF Balance (Rs.):",
             details7: "Total Loan Amount Currently Owed to the Board (Rs.): (Including EPF Loans, Distress Loan, Transport Loan, Book Loan, Festival Advance, etc...)",
             resultsHeading: "Comparison Results",
             vrsHeading: "A. Amount Received under Voluntary Retirement Scheme (VRS) (Rs.)", 
@@ -383,11 +398,11 @@
             vrsFormula2: "Service Years > 10: (Current Salary x 2 x Completed Service Years) + (Current Salary x 1.5 x Remaining Completed Service Years)",
             gratFormula: "Final Salary x 0.5 x Completed Service Years",
             continueHeading: "B. Total Earnings by Continuing Service until Age 60", contTable1Title: "Total Terminal Benefits Received at Age 60", contTable1Head: "Benefit, Final Amount (Rs.)", contTable1EPF: "EPF Final Balance (Employee + Employer + Dividend)", contTable1ETF: "ETF Final Balance (Employer)", contTable1Gratuity: "Gratuity Payment", contTable1Total: "Total Terminal Benefits (EPF, ETF, Gratuity)",
-            contTable1LoanDeduct: "Loan Payments and Deductions (to the Board):", // NEW
-            contTable1NetTotal: "Net Terminal Benefits After Loan Deduction:", // NEW
-            contTable2Title: "Annual Salary Increments and Total Net Salary Earnings until Age 60", // UPDATED
-            contTable2Head: "Year, Age, Opening Basic Salary (Rs.), Net Monthly Salary (After 10% EPF deduction), Total Net Salary for the Year (Rs.)", // UPDATED
-            contTable2TotalSalary: "Total Net Basic Salary Earned (VRS Date to Age 60)", // UPDATED
+            contTable1LoanDeduct: "Loan Payments and Deductions (to the Board):",
+            contTable1NetTotal: "Net Terminal Benefits After Loan Deduction:",
+            contTable2Title: "Annual Salary Increments and Total Net Salary Earnings until Age 60",
+            contTable2Head: "Year, Age, Opening Basic Salary (Rs.), Net Monthly Salary (After 10% EPF deduction), Total Net Salary for the Year (Rs.)",
+            contTable2TotalSalary: "Total Net Basic Salary Earned (VRS Date to Age 60)",
             contTable3Title: "Annual Calculations for Continued Service (EPF/ETF Table)", contTable3Head: "Year, Age, Basic Salary (Rs.), EPF Opening Balance (Rs.), New EPF Contribution (Rs.), EPF Dividend (Rs.), EPF Closing Balance (Rs.)",
             errorRequired: "Please fill in all required fields (with red borders).",
             errorDate: "Invalid date format (yyyy-mm-dd) or invalid date. Please select from the calendar.",
@@ -397,17 +412,19 @@
             errorCalculation: "A calculation error occurred. Please ensure all data is correct.",
             summaryHeading: "C. Final Financial Comparison Summary",
             summaryVRS: "Total Net Amount Received under VRS (After Loan Deduction):",
-            summaryContinue: "Total Income if Continued Service until Age 60 (Net Salary + Net Benefits):", // UPDATED
+            summaryContinue: "Total Income if Continued Service until Age 60 (Net Salary + Net Benefits):",
             summaryDifference: "Difference (Advantage/Disadvantage of Continuing Service):",
             summaryVRSBetter: "VRS yields a higher total amount than continuing service.",
             summaryContBetter: "Continuing service yields a higher total amount than taking VRS.",
-            contFinalTotalLabel: "Total Income (Net Terminal Benefits + Total Net Salary) of " // UPDATED
+            contFinalTotalLabel: "Total Income (Net Terminal Benefits + Total Net Salary) of "
         },
         ta: {
             disclaimer: "இது தோராயமான கணக்கீட்டு நோக்கங்களுக்காக மட்டுமே. இதற்கு எந்த சட்டப்பூர்வ செல்லுபடியும் இல்லை.",
             dataNote: "இந்த நிகழ்ச்சி நிரலால் உங்கள் தரவுகள் எதுவும் தக்கவைக்கப்படுவதில்லை", 
             contact: "கருத்துகள் மற்றும் திருத்தங்களுக்கு, 0702301171 என்ற எண்ணுக்கு WhatsApp செய்தி அனுப்பவும்",
-            title: "இலங்கை மின்சார சபையின் பயன் ஒப்பீட்டு பகுப்பாய்வு", langSelect: "மொழியைத் தெரிவுசெய்:", calculateButton: "நன்மைகளைக் கணக்கிடுக", initialMessage: "கணக்கீடுகளைப் பார்க்க மேலே உள்ள பொத்தானை அழுத்தவும்.", assumptionsHeading: "கணக்கீட்டு அனுமானங்கள்", asmp1: "பதிலீடு கணக்கிடப்படுவது, ஊழியர் சேமலாப நிதிக்கான (EPF) பங்களிப்பிற்கு எடுத்துக்கொள்ளப்படும் மாதச் சம்பளத்தின் அடிப்படையில் மட்டுமே.", asmp2: "VRS பதிலீட்டு வரம்பு: அதிகபட்சம் ரூ. 5,000,000, குறைந்தபட்சம் ரூ. 900,000.", asmp3: "பாராட்டுத் தொகை (Gratuity): இறுதிச் சம்பளத்தில் 1/2 * நிறைவு செய்யப்பட்ட சேவை ஆண்டுகளின் எண்ணிக்கை.", asmp4: "ETF பங்களிப்பு: அடிப்படைச் சம்பளத்தில் 3% ஆக கணக்கிடப்படுகிறது.", asmp5: "தொடர்ச்சியான சேவை: ஊழியர் 60 வயது வரை பணியாற்றுகிறார்.", asmp6: "நியமிக்கப்பட்ட தேதி (VRS பரிசீலனை தேதி):", asmp7: "வருடாந்திர சம்பள அதிகரிப்பு விகிதம் (%):",
+            title: "இலங்கை மின்சார சபையின் பயன் ஒப்பீட்டு பகுப்பாய்வு", langSelect: "மொழியைத் தெரிவுசெய்:", calculateButton: "நன்மைகளைக் கணக்கிடுக", initialMessage: "கணக்கீடுகளைப் பார்க்க மேலே உள்ள பொத்தானை அழுத்தவும்.", assumptionsHeading: "கணக்கீட்டு அனுமானங்கள்", asmp1: "பதிலீடு கணக்கிடப்படுவது, ஊழியர் சேமலாப நிதிக்கான (EPF) பங்களிப்பிற்கு எடுத்துக்கொள்ளப்படும் மாதச் சம்பளத்தின் அடிப்படையில் மட்டுமே.", asmp2: "VRS பதிலீட்டு வரம்பு: அதிகபட்சம் ரூ. 5,000,000, குறைந்தபட்சம் ரூ. 900,000.", asmp3: "பாராட்டுத் தொகை (Gratuity): இறுதிச் சம்பளத்தில் 1/2 * நிறைவு செய்யப்பட்ட சேவை ஆண்டுகளின் எண்ணிக்கை.", asmp4: "ETF பங்களிப்பு: அடிப்படைச் சம்பளத்தில் 3% ஆக கணக்கிடப்படுகிறது.", asmp5: "தொடர்ச்சியான சேவை: ஊழியர் 60 வயது வரை பணியாற்றுகிறார்.",
+            assumptionsNote: "பின்வரும் விடயங்கள் அனுமானங்கள் மட்டுமே. தேவைக்கேற்ப மாற்றி முயற்சி செய்யலாம்.", // NEW
+            asmp6: "நியமிக்கப்பட்ட தேதி (VRS பரிசீலனை தேதி):", asmp7: "வருடாந்திர சம்பள அதிகரிப்பு விகிதம் (%):",
             asmp8: "EPF ஆண்டு இலாபப் பங்கு வீதம் (%):", detailsHeading: "ஊழியர் விவரங்களை உள்ளிடுக", details1: "பிறந்த தேதி:", details2: "சேவையில் இணைந்த தேதி:", details3: "தற்போதைய அடிப்படைச் சம்பளம் (ரூ.):", details4: "சாதாரண சேவை காலம் (ஆண்டுகள்/மாதங்கள்):", details5: "தற்போதைய EPF இருப்பு (ரூ.):", details6: "தற்போதைய ETF இருப்பு (ரூ.):",
             details7: "தற்போது சபைக்கு செலுத்த வேண்டிய மொத்த கடன் தொகை (ரூ.): (EPF கடன்கள், Distress கடன், போக்குவரத்து கடன், புத்தக கடன், விழா முன்பணம், உள்ளிட்ட...)",
             resultsHeading: "ஒப்பீட்டு முடிவுகள்", 
@@ -425,11 +442,11 @@
             vrsFormula2: "சேவை ஆண்டுகள் > 10: (தற்போதைய சம்பளம் x 2 x நிறைவு செய்யப்பட்ட சேவை ஆண்டுகள்) + (தற்போதைய சம்பளம் x 1.5 x மீதமுள்ள நிறைவு செய்யப்பட்ட சேவை ஆண்டுகள்)",
             gratFormula: "இறுதிச் சம்பளம் x 0.5 x நிறைவு செய்யப்பட்ட சேவை ஆண்டுகள்",
             continueHeading: "B. 60 வயது வரை தொடர்ந்து சேவை செய்வதன் மூலம் பெறப்படும் மொத்த வருமானம்", contTable1Title: "60 வயதில் பெறப்படும் மொத்த இறுதி நன்மைகள் (Terminal Benefits)", contTable1Head: "பயன், இறுதித் தொகை (ரூ.)", contTable1EPF: "EPF இறுதி இருப்பு (ஊழியர் + நிறுவனம் + இலாபப் பங்கு)", contTable1ETF: "ETF இறுதி இருப்பு (நிறுவனம்)", contTable1Gratuity: "பாராட்டுத் தொகை (Gratuity)", contTable1Total: "மொத்த අවසාන ප්‍රතිලාභ එකතුව (EPF, ETF, Gratuity)",
-            contTable1LoanDeduct: "கடன் கொடுப்பனவுகள் மற்றும் கழிவுகள் (சபைக்கு):", // NEW
-            contTable1NetTotal: "கடன் கழித்த பின் நிகர இறுதி நன்மைகள்:", // NEW
-            contTable2Title: "60 வயது வரை ஆண்டு சம்பள அதிகரிப்புகள் மற்றும் மொத்த நிகர சம்பள வருமானம்", // UPDATED
-            contTable2Head: "ஆண்டு, வயது, தொடக்க அடிப்படைச் சம்பளம் (ரூ.), நிகர மாதச் சம்பளம் (10% EPF கழித்த பின்), ஆண்டுக்கான மொத்த நிகர சம்பளம் (ரூ.)", // UPDATED
-            contTable2TotalSalary: "மொத்த நிகர அடிப்படைச் சம்பளம் (VRS தேதியிலிருந்து 60 வயது வரை)", // UPDATED
+            contTable1LoanDeduct: "கடன் கொடுப்பனவுகள் மற்றும் கழிவுகள் (சபைக்கு):",
+            contTable1NetTotal: "கடன் கழித்த பின் நிகர இறுதி நன்மைகள்:",
+            contTable2Title: "60 வயது வரை ஆண்டு சம்பள அதிகரிப்புகள் மற்றும் மொத்த நிகர சம்பள வருமானம்",
+            contTable2Head: "ஆண்டு, வயது, தொடக்க அடிப்படைச் சம்பளம் (ரூ.), நிகர மாதச் சம்பளம் (10% EPF கழித்த பின்), ஆண்டுக்கான மொத்த நிகர சம்பளம் (ரூ.)",
+            contTable2TotalSalary: "மொத்த நிகர அடிப்படைச் சம்பளம் (VRS தேதியிலிருந்து 60 வயது வரை)",
             contTable3Title: "தொடர்ச்சியான சேவையின் வருடாந்திர கணக்கீடுகள் (EPF/ETF அட்டவணை)", contTable3Head: "ஆண்டு, வயது, அடிப்படைச் சம்பளம் (ரூ.), EPF தொடக்க இருப்பு (ரூ.), புதிய EPF பங்களிப்பு (ரூ.), EPF இலாபப் பங்கு (ரூ.), EPF இறுதி இருப்பு (ரூ.)",
             errorRequired: "தேவையான அனைத்து துறைகளையும் (சிவப்பு எல்லைகளுடன்) நிரப்பவும்.",
             errorDate: "தவறான திகதி வடிவம் (yyyy-mm-dd) அல்லது தவறான திகதி. நாட்காட்டியில் இருந்து தெரிவு செய்யவும்.",
@@ -439,11 +456,11 @@
             errorCalculation: "கணக்கீட்டுப் பிழை ஏற்பட்டது. எல்லா தரவுகளும் சரியாக உள்ளதா என்பதை உறுதிப்படுத்தவும்.",
             summaryHeading: "C. இறுதி நிதி ஒப்பீட்டு சுருக்கம்",
             summaryVRS: "VRS இன் கீழ் பெறப்படும் மொத்த நிகர தொகை (கடன் கழித்த பின்):",
-            summaryContinue: "60 வயது வரை தொடர்ந்து பணியாற்றினால் மொத்த வருமானம் (நிகர சம்பளம் + நிகர நன்மைகள்):", // UPDATED
+            summaryContinue: "60 வயது வரை தொடர்ந்து பணியாற்றினால் மொத்த வருமானம் (நிகர சம்பளம் + நிகர நன்மைகள்):",
             summaryDifference: "வித்தியாசம் (தொடர்ந்து பணியாற்றுவதன் நன்மை/தீமை):",
-            summaryVRSBetter: "தொடர்ந்து பணியாற்றுவதை விட VRS பெறுவது அதிக மொத்த தொகையை வழங்குகிறது.",
+            summaryVRSBetter: "VRS பெறுவதை விட தொடர்ந்து பணியாற்றுவது அதிக மொத்த தொகையை வழங்குகிறது.",
             summaryContBetter: "VRS பெறுவதை விட தொடர்ந்து பணியாற்றுவது அதிக மொத்த தொகையை வழங்குகிறது.",
-            contFinalTotalLabel: "இன் மொத்த வருமானம் (Net Terminal Benefits + Total Net Salary) of " // UPDATED
+            contFinalTotalLabel: "இன் மொத்த வருமானம் (Net Terminal Benefits + Total Net Salary) of "
         }
     };
 
@@ -558,6 +575,7 @@
         document.getElementById('asmp-3').textContent = t.asmp3;
         document.getElementById('asmp-4').textContent = t.asmp4;
         document.getElementById('asmp-5').textContent = t.asmp5;
+        document.getElementById('assumption-note-text').textContent = t.assumptionsNote; // NEW
         document.getElementById('asmp-6').textContent = t.asmp6;
         document.getElementById('asmp-7').textContent = t.asmp7;
         document.getElementById('asmp-8').textContent = t.asmp8;
