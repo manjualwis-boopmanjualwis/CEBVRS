@@ -237,6 +237,7 @@
             <li id="asmp-3">Gratuity (පාරිතෝෂිකය): අවසාන වැටුපෙන් 1/2ක් * සම්පූර්ණ කළ සේවා වසර ගණන.</li>
             <li id="asmp-4">ETF දායකත්වය: සේවකයාගේ මූලික වැටුපෙන් 3%ක් ලෙස ගණනය කෙරේ.</li>
             <li id="asmp-5">දිගටම සේවය කිරීමේදී: සේවකයා වයස අවුරුදු 60 දක්වා සේවය කරයි.</li>
+            <li id="asmp-9">දළ අදහසක් ලබාගැනීමේදී ගණනය කිරීමේ පහසුව සඳහා, දිගටම සේවය කරන්නේ නම් එවිට ලැබෙන මුළු මුදල ගණනය කිරීමේදී, ලැබීම් ලෙස මුලික වැටුප හා අඩුකිරීම් ලෙස EPF 10% පමණක් සලකා ඇත. (අනෙකුත් දීමනා සහ වරප්‍රසාද ලැබෙන/නොලැබෙන බව ඉන් අදහස් නොවේ)</li>
         </ul>
         
         <p class="assumption-note" id="assumption-note-text">පහත කරුණු උපකල්පන පමණි. අවශ්‍ය පරිදි වෙනස් කර උත්සාහ කර බැලිය හැක.</p>
@@ -278,13 +279,13 @@
             <input type="number" id="casualMonths" value="0" min="0" max="11" placeholder="මාස">
         </div>
 
-        <label id="details-5">EPF දැනට පවතින ශේෂය (Rs.):</label>
+        <label id="details-5">EPF දැනට පවතින ශේෂය (Rs.): (ජංගම දුරකතනයකින් 0112 424 238 අංකයට ( EPF ශාකාව) ඇමතුමක් ලබාදී EPF ශේෂය SMS එකක් මගින් ලබාගත හැක)</label>
         <input type="number" id="currentEpfBalance" value="0" min="0" placeholder="උදා: 15000000">
 
         <label id="details-6">ETF දැනට පවතින ශේෂය (Rs.):</label>
         <input type="number" id="currentEtfBalance" value="0" min="0" placeholder="උදා: 2500000">
         
-        <label id="details-7">දැනට මණ්ඩලයට ගෙවිය යුතු ණය මුදලෙහි එකතුව (Rs.):</label>
+        <label id="details-7">දැනට මණ්ඩලයට ගෙවිය යුතු ණය මුදලෙහි එකතුව (Rs.): (EPF ණය, Distress Loan, Transport Loan, Book Loan, Festival Advance, ආදිය...) :  (අවසන් වැටුප් වාර්තාවේ අඩුකිරීම් යටතේ මණ්ඩලයට අය විය යුතු ණය ශේෂයන් දක්වා ඇත)</label>
         <input type="number" id="loanDeduction" value="0" min="0">
 
         <button type="button" onclick="calculateBenefits()" id="calculate-button">ප්‍රතිලාභ ගණනය කරන්න</button>
@@ -325,7 +326,10 @@
             asmp3: "Gratuity (පාරිතෝෂිකය): අවසාන වැටුපෙන් 1/2ක් * සම්පූර්ණ කළ සේවා වසර ගණන.",
             asmp4: "ETF දායකත්වය: සේවකයාගේ මූලික වැටුපෙන් 3%ක් ලෙස ගණනය කෙරේ.",
             asmp5: "දිගටම සේවය කිරීමේදී: සේවකයා වයස අවුරුදු 60 දක්වා සේවය කරයි.",
-            assumptionsNote: "පහත කරුණු උපකල්පන පමණි. අවශ්‍ය පරිදි වෙනස් කර උත්සාහ කර බැලිය හැක.", // NEW
+            // NEW ASSUMPTION
+            asmp9: "දළ අදහසක් ලබාගැනීමේදී ගණනය කිරීමේ පහසුව සඳහා, දිගටම සේවය කරන්නේ නම් එවිට ලැබෙන මුළු මුදල ගණනය කිරීමේදී, ලැබීම් ලෙස මුලික වැටුප හා අඩුකිරීම් ලෙස EPF 10% පමණක් සලකා ඇත. (අනෙකුත් දීමනා සහ වරප්‍රසාද ලැබෙන/නොලැබෙන බව ඉන් අදහස් නොවේ)",
+            // END NEW ASSUMPTION
+            assumptionsNote: "පහත කරුණු උපකල්පන පමණි. අවශ්‍ය පරිදි වෙනස් කර උත්සාහ කර බැලිය හැක.", 
             asmp6: "නියමිත දිනය (Appointed Date - VRS සලකා බලන දින):",
             asmp7: "වාර්ෂික වැටුප් වර්ධන ප්‍රතිශතය (%):",
             asmp8: "EPF වාර්ෂික ලාභාංශ ප්‍රතිශතය (%):",
@@ -334,9 +338,13 @@
             details2: "සේවයට බැඳුණු දිනය:",
             details3: "වත්මන් මූලික වැටුප (Rs.):",
             details4: "අනියම් සේවා කාලය (වසර/මාස):",
-            details5: "EPF දැනට පවතින ශේෂය (Rs.):",
+            // UPDATED LABEL 5
+            details5: "EPF දැනට පවතින ශේෂය (Rs.): (ජංගම දුරකතනයකින් 0112 424 238 අංකයට ( EPF ශාකාව) ඇමතුමක් ලබාදී EPF ශේෂය SMS එකක් මගින් ලබාගත හැක)",
+            // END UPDATED LABEL 5
             details6: "ETF දැනට පවතින ශේෂය (Rs.):",
-            details7: "දැනට මණ්ඩලයට ගෙවිය යුතු ණය මුදලෙහි එකතුව (Rs.): (EPF ණය, Distress Loan, Transport Loan, Book Loan, Festival Advance, ඇතුළුව...)", 
+            // UPDATED LABEL 7
+            details7: "දැනට මණ්ඩලයට ගෙවිය යුතු ණය මුදලෙහි එකතුව (Rs.): (EPF ණය, Distress Loan, Transport Loan, Book Loan, Festival Advance, ආදිය...) :  (අවසන් වැටුප් වාර්තාවේ අඩුකිරීම් යටතේ මණ්ඩලයට අය විය යුතු ණය ශේෂයන් දක්වා ඇත)", 
+            // END UPDATED LABEL 7
             resultsHeading: "ප්‍රතිඵල සංසන්දනය",
             vrsHeading: "A. ස්වේච්ඡා විශ්‍රාම යාමේ යෝජනා ක්‍රමය (VRS) යටතේ ලැබෙන මුදල (Rs.)",
             vrsTotalComp: "වන්දි මුදල (සීමාවට යටත්ව):",
@@ -384,9 +392,18 @@
             dataNote: "This program does not retain any of your data", 
             contact: "For comments and suggestions, please WhatsApp 0702301171",
             title: "CEB Benefit Comparative Analysis", langSelect: "Select Language:", calculateButton: "Calculate Benefits", initialMessage: "Click the button above to view calculations.", assumptionsHeading: "Calculation Assumptions", asmp1: "Compensation is calculated only on the Monthly Salary considered for EPF contribution.", asmp2: "VRS Compensation Limit: Maximum Rs. 5,000,000, Minimum Rs. 900,000.", asmp3: "Gratuity: 1/2 of Last Drawn Salary * No. of Completed Years of Service.", asmp4: "ETF Contribution: Calculated as 3% of the Employee's Basic Salary.", asmp5: "Continued Service: Employee works until the age of 60.",
-            assumptionsNote: "The following points are assumptions only. You can change and try as required.", // NEW
-            asmp6: "Appointed Date (VRS Consideration Date):", asmp7: "Annual Salary Increment (%):", asmp8: "EPF Annual Dividend Rate (%):", detailsHeading: "Enter Employee Details", details1: "Date of Birth:", details2: "Date of Joining:", details3: "Current Basic Salary (Rs.):", details4: "Casual Service Period (Years/Months):", details5: "Current EPF Balance (Rs.):", details6: "Current ETF Balance (Rs.):",
-            details7: "Total Loan Amount Currently Owed to the Board (Rs.): (Including EPF Loans, Distress Loan, Transport Loan, Book Loan, Festival Advance, etc...)",
+            // NEW ASSUMPTION
+            asmp9: "For ease of calculation in obtaining a rough idea, when calculating the total amount received if service is continued, only the Basic Salary as receipts and 10% EPF as deductions are considered. (This does not imply that other allowances and benefits are or are not received)",
+            // END NEW ASSUMPTION
+            assumptionsNote: "The following points are assumptions only. You can change and try as required.", 
+            asmp6: "Appointed Date (VRS Consideration Date):", asmp7: "Annual Salary Increment (%):", asmp8: "EPF Annual Dividend Rate (%):", detailsHeading: "Enter Employee Details", details1: "Date of Birth:", details2: "Date of Joining:", details3: "Current Basic Salary (Rs.):", details4: "Casual Service Period (Years/Months):",
+            // UPDATED LABEL 5
+            details5: "Current EPF Balance (Rs.): (The EPF balance can be obtained via SMS by calling 0112 424 238 (EPF branch) from a mobile phone)",
+            // END UPDATED LABEL 5
+            details6: "Current ETF Balance (Rs.):",
+            // UPDATED LABEL 7
+            details7: "Total Loan Amount Currently Owed to the Board (Rs.): (Including EPF Loans, Distress Loan, Transport Loan, Book Loan, Festival Advance, etc...) :  (Loan balances owed to the board are indicated under deductions on the last salary statement)",
+            // END UPDATED LABEL 7
             resultsHeading: "Comparison Results",
             vrsHeading: "A. Amount Received under Voluntary Retirement Scheme (VRS) (Rs.)", 
             vrsTotalComp: "Compensation Amount (Subject to Limit):",
@@ -427,10 +444,19 @@
             dataNote: "இந்த நிகழ்ச்சி நிரலால் உங்கள் தரவுகள் எதுவும் தக்கவைக்கப்படுவதில்லை", 
             contact: "கருத்துகள் மற்றும் திருத்தங்களுக்கு, 0702301171 என்ற எண்ணுக்கு WhatsApp செய்தி அனுப்பவும்",
             title: "இலங்கை மின்சார சபையின் பயன் ஒப்பீட்டு பகுப்பாய்வு", langSelect: "மொழியைத் தெரிவுசெய்:", calculateButton: "நன்மைகளைக் கணக்கிடுக", initialMessage: "கணக்கீடுகளைப் பார்க்க மேலே உள்ள பொத்தானை அழுத்தவும்.", assumptionsHeading: "கணக்கீட்டு அனுமானங்கள்", asmp1: "பதிலீடு கணக்கிடப்படுவது, ஊழியர் சேமலாப நிதிக்கான (EPF) பங்களிப்பிற்கு எடுத்துக்கொள்ளப்படும் மாதச் சம்பளத்தின் அடிப்படையில் மட்டுமே.", asmp2: "VRS பதிலீட்டு வரம்பு: அதிகபட்சம் ரூ. 5,000,000, குறைந்தபட்சம் ரூ. 900,000.", asmp3: "பாராட்டுத் தொகை (Gratuity): இறுதிச் சம்பளத்தில் 1/2 * நிறைவு செய்யப்பட்ட சேவை ஆண்டுகளின் எண்ணிக்கை.", asmp4: "ETF பங்களிப்பு: அடிப்படைச் சம்பளத்தில் 3% ஆக கணக்கிடப்படுகிறது.", asmp5: "தொடர்ச்சியான சேவை: ஊழியர் 60 வயது வரை பணியாற்றுகிறார்.",
-            assumptionsNote: "பின்வரும் விடயங்கள் அனுமானங்கள் மட்டுமே. தேவைக்கேற்ப மாற்றி முயற்சி செய்யலாம்.", // NEW
+            // NEW ASSUMPTION
+            asmp9: "ஒரு தோராயமான கருத்தைப் பெறுவதற்கான கணக்கீட்டின் எளிமைக்காக, சேவை தொடரப்பட்டால் பெறப்படும் மொத்தத் தொகையைக் கணக்கிடும்போது, அடிப்படைச் சம்பளம் வரவுகளாகவும், 10% EPF மட்டுமே கழிவுகளாகவும் கருதப்படுகிறது. (இதர கொடுப்பனவுகள் மற்றும் சலுகைகள் பெறப்படும்/பெறப்படாதவை என்று இது குறிக்கவில்லை)",
+            // END NEW ASSUMPTION
+            assumptionsNote: "பின்வரும் விடயங்கள் அனுமானங்கள் மட்டுமே. தேவைக்கேற்ப மாற்றி முயற்சி செய்யலாம்.", 
             asmp6: "நியமிக்கப்பட்ட தேதி (VRS பரிசீலனை தேதி):", asmp7: "வருடாந்திர சம்பள அதிகரிப்பு விகிதம் (%):",
-            asmp8: "EPF ஆண்டு இலாபப் பங்கு வீதம் (%):", detailsHeading: "ஊழியர் விவரங்களை உள்ளிடுக", details1: "பிறந்த தேதி:", details2: "சேவையில் இணைந்த தேதி:", details3: "தற்போதைய அடிப்படைச் சம்பளம் (ரூ.):", details4: "சாதாரண சேவை காலம் (ஆண்டுகள்/மாதங்கள்):", details5: "தற்போதைய EPF இருப்பு (ரூ.):", details6: "தற்போதைய ETF இருப்பு (ரூ.):",
-            details7: "தற்போது சபைக்கு செலுத்த வேண்டிய மொத்த கடன் தொகை (ரூ.): (EPF கடன்கள், Distress கடன், போக்குவரத்து கடன், புத்தக கடன், விழா முன்பணம், உள்ளிட்ட...)",
+            asmp8: "EPF ஆண்டு இலாபப் பங்கு வீதம் (%):", detailsHeading: "ஊழியர் விவரங்களை உள்ளிடுக", details1: "பிறந்த தேதி:", details2: "சேவையில் இணைந்த தேதி:", details3: "தற்போதைய அடிப்படைச் சம்பளம் (ரூ.):", details4: "சாதாரண சேவை காலம் (ஆண்டுகள்/மாதங்கள்):",
+            // UPDATED LABEL 5
+            details5: "தற்போதைய EPF இருப்பு (ரூ.): (மொபைல் தொலைபேசியில் இருந்து 0112 424 238 (EPF கிளை) என்ற எண்ணுக்கு அழைப்பதன் மூலம் EPF இருப்பை SMS மூலம் பெறலாம்)",
+            // END UPDATED LABEL 5
+            details6: "தற்போதைய ETF இருப்பு (ரூ.):",
+            // UPDATED LABEL 7
+            details7: "தற்போது சபைக்கு செலுத்த வேண்டிய மொத்த கடன் தொகை (ரூ.): (EPF கடன்கள், Distress கடன், போக்குவரத்து கடன், புத்தக கடன், விழா முன்பணம், முதலியன...) :  (கடைசி சம்பள அறிக்கையில் கழிவுகளின் கீழ் சபைக்கு செலுத்த வேண்டிய கடன் நிலுவைகள் குறிப்பிடப்பட்டுள்ளன)",
+            // END UPDATED LABEL 7
             resultsHeading: "ஒப்பீட்டு முடிவுகள்", 
             vrsHeading: "A. விருப்ப ஓய்வுத் திட்டத்தின் (VRS) கீழ் பெறப்படும் தொகை (ரூ.)", 
             vrsTotalComp: "பதிலீட்டுத் தொகை (வரம்புக்கு உட்பட்டது):",
@@ -579,6 +605,7 @@
         document.getElementById('asmp-3').textContent = t.asmp3;
         document.getElementById('asmp-4').textContent = t.asmp4;
         document.getElementById('asmp-5').textContent = t.asmp5;
+        document.getElementById('asmp-9').textContent = t.asmp9; // NEW
         document.getElementById('assumption-note-text').textContent = t.assumptionsNote; // NEW
         document.getElementById('asmp-6').textContent = t.asmp6;
         document.getElementById('asmp-7').textContent = t.asmp7;
@@ -589,9 +616,9 @@
         document.getElementById('details-2').textContent = t.details2;
         document.getElementById('details-3').textContent = t.details3;
         document.getElementById('details-4').textContent = t.details4;
-        document.getElementById('details-5').textContent = t.details5;
+        document.getElementById('details-5').textContent = t.details5; // UPDATED
         document.getElementById('details-6').textContent = t.details6;
-        document.getElementById('details-7').textContent = t.details7; // Loan
+        document.getElementById('details-7').textContent = t.details7; // UPDATED Loan
 
         // Attempt to refresh results to translate tables if results exist
         const resultsContainer = document.getElementById('results-container');
@@ -840,7 +867,7 @@
 
             // --- A. VRS Results (Updated Structure) ---
             html += `<div class="vrs-box">
-                        <h3 id="vrs-heading">${t.vrsHeading} (${appointedDate.toLocaleDateString('si-LK', { year: 'numeric', month: 'numeric', day: 'numeric' })})</h3>
+                        <h3 id="vrs-heading">${t.vrsHeading} (${appointedDate.toLocaleDateString('si-LK', { year: 'numeric', month: 'numeric', day: 'numeric' })} - ${t.details4.split(':')[0].trim()}: ${completedVrsYears.toFixed(0)} ${t.contTable2Head.split(',')[0]})</h3>
                         <table>
                             <tr>
                                 <td id="vrs-formula-comp" style="width: 70%;">${t.vrsFormulaComp}</td>
